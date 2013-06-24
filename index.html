@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+</script>
+<script>
+
+  // App variables - should match registered info on iNat
+  var CLIENT_ID = "7d8200b28bcbd03f76550993813c55bd2bb46d6700624565867e8ccb499c9e0c";
+  var REDIRECT_URI = escape("http://localhost/inaturalist/callback.html");
+
+  $(document).ready(function(){
+
+    // Authenticate button clicked
+    $("#login").click(function(){
+      window.location = "https://www.inaturalist.org/oauth/authorize?client_id=" + CLIENT_ID + 
+        "&redirect_uri=" + REDIRECT_URI + "&response_type=token";
+      });
+    
+    // Add obs button clicked
+    $("#add_obs").click(function(){
+      window.location = "add_obs.html";
+      });
+
+    });
+
+</script>
+</head>
+<body>
+  
+  <center><h1>
+  <button id="login">Login to iNaturalist</button>
+  <button id="add_obs">Add an observation</button>
+  </center></h1>
+
+</body>
+</html>

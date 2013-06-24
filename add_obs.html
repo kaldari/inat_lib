@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<style>
+  .indent-1 {float: center;}
+  .indent-1 section {width: 33.33%%; float: left; margin: 25px;}
+</style>
+
+<form action="php/add_obs.php" method="post">
+<section class="indent-1">
+
+    <!-- Section 1 --> 
+    <section>
+      <p>Species guess: <input type="text" name="species_guess" /></p>
+      <p>ID please? 
+        <select name="id_please">
+        <option value="NULL"></option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+        </select>
+      </p>
+      <p><textarea name="description" cols="25" rows="5" placeholder="Description"></textarea></p>
+      <p>Tags: <input type="text" name="tag_list" /></p>
+
+      <p><input type="submit" /></p>
+    </section>
+
+    <!-- Section 2 --> 
+    <section>
+      <p>Place guess: <input type="text" name="place_guess" /></p>
+      <p>Latitude: <input type="number" name="latitude" min="-90" max="90"></p>
+      <p>Longitude: <input type="number" name="longitude" min="-180" max="180"></p>
+      <p>Geoprivacy: 
+        <select name="geoprivacy">
+        <option value="open">open</option>
+        <option selected="obscured">obscured</option>
+        <option value="private">private</option>
+        </select>
+      </p>
+    </section>
+
+    <!-- Section 3 --> 
+    <section>
+    </section>
+</section>
+</form>
+
+</body>
+</html>
