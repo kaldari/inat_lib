@@ -1,52 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>iNaturalist | Add observation</title>
+  <meta name="description" content="iNaturalist add obervation">
+  <meta name="keywords" content="HTML,CSS,JavaScript">
+  <meta name="author" content="Kyle Garsuta">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/inat.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#form").validate();
+    });
+  </script>
 </head>
 <body>
-
-<style>
-  .indent-1 {float: center;}
-  .indent-1 section {width: 33.33%%; float: left; margin: 25px;}
-</style>
-
-<form action="php/add_obs.php" method="post">
-<section class="indent-1">
-
-    <!-- Section 1 --> 
-    <section>
-      <p>Species guess: <input type="text" name="species_guess" /></p>
-      <p>ID please? 
+  <form action="php/add_obs.php" method="post" id="form">
+    <fieldset>
+      <p>
+        <label for="species_guess">Species guess</label>
+        <input type="text" name="species_guess" />
+        <!--Allowed values: Any-->
+      </p>
+      <p>
+        <label for="id_please">ID please?</label>
         <select name="id_please">
-        <option value="NULL"></option>
-        <option value="1">Yes</option>
-        <option value="0">No</option>
+          <option value=""></option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
         </select>
+        <!--Allowed values: 0 | 1-->
+        
       </p>
-      <p><textarea name="description" cols="25" rows="5" placeholder="Description"></textarea></p>
-      <p>Tags: <input type="text" name="tag_list" /></p>
-
-      <p><input type="submit" /></p>
-    </section>
-
-    <!-- Section 2 --> 
-    <section>
-      <p>Place guess: <input type="text" name="place_guess" /></p>
-      <p>Latitude: <input type="number" name="latitude" min="-90" max="90"></p>
-      <p>Longitude: <input type="number" name="longitude" min="-180" max="180"></p>
-      <p>Geoprivacy: 
+      <p>
+        <label for="description"></label>
+        <textarea name="description" cols="25" rows="5" placeholder="Description"></textarea>
+        <!--Allowed values: Any-->
+      </p>
+      <p>
+        <label for="latitude">Latitude</label>
+        <input type="number" name="latitude" step="0.00001" 
+          min="-90.00000" max="90.00000" pattern=".{-90,90}">
+        <!--Allowed values: -90 to 90-->
+        <!--Should implement google maps before deployment-->
+      </p>
+      <p>
+        <label for="longitude">LatitudeLongitude</label>
+        <input type="number" name="longitude" step="0.00001" 
+          min="-180.00000" max="180.00000" pattern=".{-180,180}">
+        <!--Allowed values: -180 to 180-->
+      </p>
+      <p>
+        <label for="geoprivacy">Geoprivacy</label>
         <select name="geoprivacy">
-        <option value="open">open</option>
-        <option selected="obscured">obscured</option>
-        <option value="private">private</option>
+          <option value="open">open</option>
+          <option selected="obscured">obscured</option>
+          <option value="private">private</option>
         </select>
+        <!--Allowed values: open | obscured | private-->
       </p>
-    </section>
-
-    <!-- Section 3 --> 
-    <section>
-    </section>
-</section>
+      <p>
+        <input type="submit" />
+      </p>
+    </fieldset>
 </form>
-
 </body>
 </html>
