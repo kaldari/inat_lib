@@ -3,7 +3,7 @@
 /* File:            add_obs.php
  * Author:          Kyle Garsuta
  * Created:         19 Jun 2013
- * Last modified:   21 Jun 2013 by Kyle
+ *
  * PRE:             Valid OAuth 2.0 token must be stored in 'inat_auth' cookie
  * POST:            User observation is posted to iNaturalist.org
  *
@@ -44,15 +44,17 @@ $opts = array(
 // Send http post request
 $context = stream_context_create($opts);
 $fp = fopen($query_string, 'r', false, $context);
+if($fp) {
+  echo "<p><center><h1>Submission success!</center></h1></p>";
+  
+  // Print server response
+  $server_response = stream_get_contents($fp);
+  fclose($fp);
+  echo $server_response;
 
-// Print server response
-$server_response = stream_get_contents($fp);
-
-// TODO - iNat reply is in json format and has to be decoded
-// Hide response for now and display confirmation message
-// echo $server_response;
-fclose($fp);
-echo "<p><h1>Thank you for your submission!</h1></p>";
-
-?>
+  // TODO - iNat reply is in json format and has to be decoded
+  // Hide response for now and display confirmation message
+} else {
+  echo "<p><center><h1>Submission error!</center></h1></p>";
+}
 
