@@ -27,12 +27,18 @@
     <p>
       <label for="password">Password</label>
       <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
-      <!--Allowed values: Minimum 5 characters-->
-    <p>
+      <!--Allowed values: Minimum 5 characters (this is not inat specified)-->
+    </p>
     <p>
       <label for="password_confirmation">Password confirmation</label>
       <input type="password" equalto="#password" name="password_confirmation" />
       <!--Allowed values: Value matching id='password'-->
+    </p>
+    <p>
+      <input type="checkbox" name="terms" class="required checkbox" />
+        I agree to the terms and conditions<br>
+        <!--Terms and conditions link need to be added here-->
+    </p>
     <p>
       <input type="submit" value="Submit" name="submit" />
     </p>
