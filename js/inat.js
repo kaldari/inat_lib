@@ -27,7 +27,7 @@ function callback(redirect_url){
 // This function extracts the OAuth2 token from the callback
 // query string and stores it in 'inat_auth' cookie
 // PRE: OAuth2 token is appended on callback query string
-// POST: OAuth 2.0 token is stored in 'inat_auth' cookie
+// POST: OAuth 2.0 token is stored in 'inat_auth' cookie, then redirect to url
 
   // Parse the query string
   var queryString = location.hash.substring(14);
@@ -44,6 +44,6 @@ function callback(redirect_url){
   var cookie_value=escape(token) + ((ex_days==null) ? "" : "; expires="+ex_date.toUTCString());
   document.cookie=cookie_name + "=" + cookie_value;
 
-  // Redirect to homepage once token has been saved
+  // Redirect to specified url
   window.location = redirect_url;
 }
