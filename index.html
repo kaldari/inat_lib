@@ -7,47 +7,21 @@
   <meta name="author" content="Kyle Garsuta">
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/inat.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
-  </script>
-  <script>
-
-    // App variables - should match registered info on iNat
-    var CLIENT_ID = "7d8200b28bcbd03f76550993813c55bd2bb46d6700624565867e8ccb499c9e0c";
-    var REDIRECT_URI = escape("http://localhost/inaturalist/callback.html");
-
-    $(document).ready(function(){
-
-      // Authenticate button clicked
-      $("#login").click(function(){
-        window.location = "https://www.inaturalist.org/oauth/authorize?client_id=" + CLIENT_ID + 
-          "&redirect_uri=" + REDIRECT_URI + "&response_type=token";
-        });
-      
-      // Add obs button clicked
-      $("#add_obs").click(function(){
-        window.location = "add_obs.html";
-        });
-
-      // Register button clicked
-      $("#register").click(function(){
-        window.location = "register.html";
-        });
-
-      });
-
-  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/inat.js"></script>
 </head>
 <body>
   <div id="form">
     <fieldset>
       <p>
-        <button id="login">Log in to iNaturalist</button>
+        <input type="button" onclick="authenticate('7d8200b28bcbd03f76550993813c55bd2bb46d6700624565867e8ccb499c9e0c',
+          'http://localhost/inaturalist/callback.html');" value="Log in to iNaturalist">
       </p>
       <p>
-        <button id="add_obs">Add an observation</button>
+        <input type="button" onclick="redirect('add_obs.html')" value="Add an observation">
       </p>
       <p>
-        <button id="register">Register</button>
+        <input type="button" onclick="redirect('register.html')" value="Register">
       </p>
     </fieldset>
   </div>
