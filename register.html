@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="css/register.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
   <script type="text/javascript">
@@ -8,32 +9,6 @@
       $("#reg_form").validate();
     });
   </script>
-  <style>
-    #reg_form fieldset {
-      padding:1em 1.5em;
-      border:1px solid #bbb;
-      width: 250px;
-      margin: 50px auto;
-    }
-     
-    #reg_form legend {
-      font-weight:bold;
-    }
-     
-    #reg_form label {
-      display:block;
-    }
-     
-    #reg_form label span {
-      color:#f00;
-    }
-
-    #reg_form .error {
-      padding:5px;
-      margin:5px 0;
-      border:1px solid #f00;
-    }
-  </style>
 </head>
 <body>
   <form action="php/register.php" method="post" id="reg_form">

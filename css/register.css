@@ -1,0 +1,24 @@
+#reg_form fieldset {
+  padding:1em 1.5em;
+  border:1px solid #bbb;
+  width: 250px;
+  margin: 50px auto;
+}
+     
+#reg_form legend {
+  font-weight:bold;
+}
+     
+#reg_form label {
+  display:block;
+}
+     
+#reg_form label span {
+  color:#f00;
+}
+
+#reg_form .error {
+  padding:5px;
+  margin:5px 0;
+  border:1px solid #f00;
+}
