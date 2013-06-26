@@ -1,0 +1,24 @@
+#form fieldset {
+  padding:1em 1.5em;
+  border:1px solid #bbb;
+  width: 250px;
+  margin: 50px auto;
+}
+     
+#form legend {
+  font-weight:bold;
+}
+     
+#form label {
+  display:block;
+}
+     
+#form label span {
+  color:#f00;
+}
+
+#form .error {
+  padding:5px;
+  margin:5px 0;
+  border:1px solid #f00;
+}
