@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#signup_form").validate();
+    });
+  </script>
+  <style>
+    #signup_form fieldset {
+     padding:1em 1.5em;
+     border:1px solid #bbb;
+    }
+     
+    #signup_form legend {
+     font-weight:bold;
+    }
+     
+    #signup_form label {
+     display:block;
+    }
+     
+    #signup_form label span {
+     color:#f00;
+    }
+
+    #signup_form .error {
+     padding:5px;
+     margin:5px 0;
+     border:1px solid #f00;
+    }
+  </style>
+</head>
+<body>
+  <form action="php/register.php" method="post" id="signup_form">
+    <fieldset>
+    <legend>Registration</legend>
+    <p>
+      <label for="login">Login/username</label>
+      <input type="text" name="login"size="30" pattern=".{3,40}" required />
+      <!--Allowed values: Must be within 3 and 40 characters and must not begin with a number.-->
+    </p>
+    <p>
+      <label for="email">Email</label>
+      <input type="text" name="email" size="30" class="required email" />
+      <!--Allowed values: Any valid email address.-->
+    </p>
+    <p>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
+      <!--Allowed values: Minimum 5 characters-->
+    <p>
+    <p>
+      <label for="password_confirmation">Password confirmation</label>
+      <input type="password" equalto="#password" name="password_confirmation" />
+      <!--Allowed values: Value matching id='password'-->
+    <p>
+      <input type="submit" value="Submit" name="submit" />
+    </p>
+    </fieldset>
+</form>
+</body>
+</html>
