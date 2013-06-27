@@ -7,6 +7,7 @@
  *  See iNat API Reference: http://www.inaturalist.org/pages/api+reference
  */
 
+base_url = "http://localhost/inaturalist";
 
 function redirect(redirect_url) {
 // A simple redirect function

@@ -14,8 +14,18 @@
       $("#form").validate();
     });
   </script>
+  <script>
+    function login_onload() {
+      // Hide everything if user is already logged in
+      if(true) {
+        document.getElementById("form").style.visibility="hidden";
+        // Redirect to index -- TEMPORARY
+        window.location = "index.html";
+      }
+    }
+  </script>
 </head>
-<body>
+<body onload="login_onload()">
   <form action="php/login.php" method="post" id="form">
     <fieldset>
       <legend>Login to iNaturalist</legend>
@@ -33,6 +43,6 @@
         <input type="submit" value="Submit" name="submit" />
       </p>
     </fieldset>
-</form>
+  </form>
 </body>
 </html>
