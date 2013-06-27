@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>iNaturalist | Login</title>
+  <meta name="description" content="iNaturalist login">
+  <meta name="keywords" content="HTML,CSS,JavaScript">
+  <meta name="author" content="Kyle Garsuta">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/inat.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#form").validate();
+    });
+  </script>
+</head>
+<body>
+  <form action="php/login.php" method="post" id="form">
+    <fieldset>
+      <legend>Registration</legend>
+      <p>
+        <label for="login">Login/username</label>
+        <input type="text" name="login"size="30" pattern=".{3,40}" class="required" />
+        <!--Allowed values: Must be within 3 and 40 characters and must not begin with a number.-->
+      </p>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
+        <!--Allowed values: Minimum 5 characters (this is not inat specified)-->
+      </p>
+      <p>
+        <input type="submit" value="Submit" name="submit" />
+      </p>
+    </fieldset>
+</form>
+</body>
+</html>

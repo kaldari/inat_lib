@@ -14,8 +14,11 @@
   <div id="form">
     <fieldset>
       <p>
+        <input type="button" onclick="redirect('login.html')" value="Log in to iNaturalist">
+      </p>      
+      <p>
         <input type="button" onclick="authenticate('7d8200b28bcbd03f76550993813c55bd2bb46d6700624565867e8ccb499c9e0c',
-          'http://localhost/inaturalist/callback.html');" value="Log in to iNaturalist">
+          'http://localhost/inaturalist/callback.html');" value="Authorize application">
       </p>
       <p>
         <input type="button" onclick="redirect('add_obs.html')" value="Add an observation">
