@@ -12,9 +12,6 @@
  * Description:     
  *  This program submits an HTTP POST request using the iNaturalist.org API on behalf of a user. The user is then logged in
  *  using the provided username and password.
- *  
- *  See iNat API Reference: http://www.inaturalist.org/pages/api+reference
- *
  */
 
 // config.php contains site info (e.g. client_id, client_secret, etc.)
@@ -42,20 +39,31 @@ $opts = array(
 );
 
 // Send http post request
-$query_string = "$base_url/oauth/token";
+$query_string = "$inat_url/oauth/token";
 $context = stream_context_create($opts);
 $fp = fopen($query_string, 'r', false, $context);
 if($fp) {
   echo "<p><center><h1>Submission success!</center></h1></p>";
   
-  // Print server response
-  $server_response = stream_get_contents($fp);
-  fclose($fp);
-  echo $server_response;
+  // Parse server response
+  $response = json_decode(stream_get_contents($fp));
 
-  // TODO - iNat reply is in json format and has to be decoded
-  // Hide response for now and display confirmation message
+  // Set cookie based on parsed data
+  $cookie_value = $response->{'token_type'} . ' ' . $response->{'access_token'};
+  $expire_in = $response->{'expires_in'};
+  $expire_default = time() + ($logged_in_days * 24 * 60 * 60);
+  // Cookie expires as set by server or to default days set in config.php
+  $expiry = $expire_in ? $expire_in : $expire_default;
+  setcookie("inat_auth", $cookie_value, $expiry);
+  
+  // Close file and redirect to homepage
+  fclose($fp);
+  header("Location: $base_url");
+  die();
+
 } else {
-  echo "<p><center><h1>Submission error!</center></h1></p>";
+  // Redirect to referrer; prompt for valid login
+  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  die();
 }
 

@@ -8,7 +8,7 @@
  */
 
 
-function redirect(redirect_url){
+function redirect(redirect_url) {
 // A simple redirect function
 // POST: Redirect to specified url
 
@@ -23,7 +23,7 @@ function authenticate(client_id, callback_url){
     "&redirect_uri=" + escape(callback_url) + "&response_type=token" );
 }
 
-function callback(redirect_url){
+function callback(redirect_url) {
 // This function extracts the OAuth2 token from the callback
 // query string and stores it in 'inat_auth' cookie
 // PRE: OAuth2 token is appended on callback query string
@@ -47,3 +47,4 @@ function callback(redirect_url){
   // Redirect to specified url
   window.location = redirect_url;
 }
+
