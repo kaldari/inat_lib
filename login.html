@@ -7,25 +7,28 @@
   <meta name="author" content="Kyle Garsuta">
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/inat.css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+  <script src="js/inat.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#form").validate();
-    });
-  </script>
-  <script>
-    function login_onload() {
+    function onload() {
       // Hide everything if user is already logged in
-      if(true) {
+
+      if(typeof $.cookie('inat_auth') != 'undefined') {
         document.getElementById("form").style.visibility="hidden";
         // Redirect to index -- TEMPORARY
         window.location = "index.html";
       }
     }
   </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#form").validate();
+    });
+  </script>
 </head>
-<body onload="login_onload()">
+<body onload="onload()">
   <form action="php/login.php" method="post" id="form">
     <fieldset>
       <legend>Login to iNaturalist</legend>

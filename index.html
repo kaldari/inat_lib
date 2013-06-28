@@ -8,26 +8,42 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/inat.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
   <script src="js/inat.js"></script>
+  <script type="text/javascript">
+    function index_onload() {
+      // Hide everything if user is already logged in
+
+      if(typeof $.cookie('inat_auth') != 'undefined') {
+        document.getElementById("login").style.display="none";
+        document.getElementById("register").style.display="none";
+         
+      } else {
+        document.getElementById("add_obs").style.display="none";
+        document.getElementById("logout").style.display="none";
+      }
+    }
+
+    function logout() {
+      $.removeCookie('inat_auth', { path: '/' });
+      location.reload();
+    }
+  </script>
 </head>
-<body>
+<body onload="index_onload()">
   <div id="form">
     <fieldset>
       <p>
-        <input type="button" onclick="redirect('login.html')" value="Log in to iNaturalist">
+        <input id="login" type="button" onclick="redirect('login.html')" value="Log in to iNaturalist">
       </p>      
       <p>
-        <input type="button" onclick="authenticate('7d8200b28bcbd03f76550993813c55bd2bb46d6700624565867e8ccb499c9e0c',
-          'http://localhost/inaturalist/callback.html');" value="Authorize application">
+        <input id="add_obs" type="button" onclick="redirect('add_obs.html')" value="Add an observation">
       </p>
       <p>
-        <input type="button" onclick="redirect('add_obs.html')" value="Add an observation">
+        <input id="register" type="button" onclick="redirect('register.html')" value="Register">
       </p>
       <p>
-        <input type="button" onclick="redirect('register.html')" value="Register">
-      </p>
-      <p>
-        <input type="button" onclick="redirect('php/logout.php')" value="Logout">
+        <input id="logout" type="button" onclick="logout()" value="Logout">
       </p>
     </fieldset>
   </div>

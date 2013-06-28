@@ -48,4 +48,3 @@ function callback(redirect_url) {
   // Redirect to specified url
   window.location = redirect_url;
 }
-

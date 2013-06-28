@@ -54,7 +54,7 @@ if($fp) {
   $expire_default = time() + ($logged_in_days * 24 * 60 * 60);
   // Cookie expires as set by server or to default days set in config.php
   $expiry = $expire_in ? $expire_in : $expire_default;
-  setcookie("inat_auth", $cookie_value, $expiry);
+  setcookie("inat_auth", $cookie_value, $expiry, '/');
   
   // Close file and redirect to homepage
   fclose($fp);
