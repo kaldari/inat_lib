@@ -3,17 +3,14 @@
 <head>
   <title>iNaturalist | Home</title>
   <meta name="description" content="iNaturalist home">
-  <meta name="keywords" content="HTML,CSS,JavaScript">
   <meta name="author" content="Kyle Garsuta">
-  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/inat.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/jquery/jquery-1.10.1.min.js"></script>
   <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
   <script src="js/inat.js"></script>
   <script type="text/javascript">
     function index_onload() {
-      // Hide everything if user is already logged in
-
+    // Displays/hides items as accordingly (e.g. hide login if already logged in)
       if(typeof $.cookie('inat_auth') != 'undefined') {
         document.getElementById("login").style.display="none";
         document.getElementById("register").style.display="none";
@@ -25,6 +22,8 @@
     }
 
     function logout() {
+    // PRE: User is logged in
+    // POST: User is logged out
       $.removeCookie('inat_auth', { path: '/' });
       location.reload();
     }
@@ -34,13 +33,13 @@
   <div id="form">
     <fieldset>
       <p>
-        <input id="login" type="button" onclick="redirect('login.html')" value="Log in to iNaturalist">
+        <input id="login" type="button" onclick="window.location = 'login.html'" value="Log in to iNaturalist">
       </p>      
       <p>
-        <input id="add_obs" type="button" onclick="redirect('add_obs.html')" value="Add an observation">
+        <input id="add_obs" type="button" onclick="window.location = 'add_obs.html'" value="Add an observation">
       </p>
       <p>
-        <input id="register" type="button" onclick="redirect('register.html')" value="Register">
+        <input id="register" type="button" onclick="window.location = 'register.html'" value="Register">
       </p>
       <p>
         <input id="logout" type="button" onclick="logout()" value="Logout">
