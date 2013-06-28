@@ -43,10 +43,9 @@ $query_string = "$inat_url/oauth/token";
 $context = stream_context_create($opts);
 $fp = fopen($query_string, 'r', false, $context);
 if($fp) {
-  echo "<p><center><h1>Submission success!</center></h1></p>";
-  
   // Parse server response
   $response = json_decode(stream_get_contents($fp));
+  fclose($fp);
 
   // Set cookie based on parsed data
   $cookie_value = $response->{'token_type'} . ' ' . $response->{'access_token'};
@@ -55,10 +54,21 @@ if($fp) {
   // Cookie expires as set by server or to default days set in config.php
   $expiry = $expire_in ? $expire_in : $expire_default;
   setcookie("inat_auth", $cookie_value, $expiry, '/');
+
+  // Add user to project
+  $authorization = ucfirst($cookie_value);
+  $opts = array(
+    'http'=>array(
+      'method'=>"POST",
+      'header'=>"Authorization: $authorization",
+    )
+  );
+  $context = stream_context_create($opts);
+  fopen("$inat_url/projects/$project/join", 'r', false, $context);
+  // Failure to join project does not affect login
   
-  // Close file and redirect to homepage
-  fclose($fp);
-  header("Location: $base_url");
+  // Redirect to set page
+  header("Location: $url_after_login");
   die();
 
 } else {
