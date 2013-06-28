@@ -12,7 +12,7 @@ The following html files can be embedded as objects on any webpage:
       Description: ~need to add
       Dependencies: ~need to add
 
-  2.  callback.html
+  2.  login.html
       Description: ~need to add
       Dependencies: ~need to add
 

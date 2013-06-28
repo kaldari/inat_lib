@@ -11,4 +11,7 @@ $logged_in_days = 7;
 // This is the homepage of the host site, used to redirect after certain actions
 $base_url = "http://localhost/inaturalist";
 
+// The url you want to redirect after an observation is submitted
+$url_after_add_obs = $base_url;
+
 

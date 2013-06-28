@@ -22,7 +22,8 @@
 $base_url = "https://www.inaturalist.org";
 
 // Construct authorization string from cookie
-$authorization = "Bearer " . $_COOKIE['inat_auth'];
+// Capitalize 'Bearer' as iNat server won't accept 'bearer'
+$authorization = ucfirst($_COOKIE['inat_auth']);
 
 // Construct query string (i.e. from html post data)
 $query_string = "$base_url/observations.json?";
