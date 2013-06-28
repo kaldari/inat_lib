@@ -9,13 +9,6 @@
 
 base_url = "http://localhost/inaturalist";
 
-function redirect(redirect_url) {
-// A simple redirect function
-// POST: Redirect to specified url
-
-  window.location = redirect_url;
-}
-
 function authenticate(client_id, callback_url){
 // Authenticate app based on id and callback url
 // POST: Redirect to app authentication url

@@ -3,29 +3,21 @@
 <head>
   <title>iNaturalist | Login</title>
   <meta name="description" content="iNaturalist login">
-  <meta name="keywords" content="HTML,CSS,JavaScript">
   <meta name="author" content="Kyle Garsuta">
-  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/inat.css">
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script src="js/jquery/jquery-1.10.1.min.js"></script>
   <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
-  <script src="js/inat.js"></script>
   <script type="text/javascript">
     function onload() {
-      // Hide everything if user is already logged in
-
       if(typeof $.cookie('inat_auth') != 'undefined') {
-        document.getElementById("form").style.visibility="hidden";
+      // If user is logged in, hide form
+        document.getElementById("form").style.display="none";
+
         // Redirect to index -- TEMPORARY
         window.location = "index.html";
       }
     }
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $("#form").validate();
-    });
   </script>
 </head>
 <body onload="onload()">
@@ -34,12 +26,12 @@
       <legend>Login to iNaturalist</legend>
       <p>
         <label for="login">Login/username</label>
-        <input type="text" name="login"size="30" pattern=".{3,40}" class="required" />
+        <input type="text" name="login"size="30" pattern=".{3,40}" required />
         <!--Allowed values: Must be within 3 and 40 characters and must not begin with a number.-->
       </p>
       <p>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
+        <input type="password" name="password" id="password" pattern=".{5,}" required />
         <!--Allowed values: Minimum 5 characters (this is not inat specified)-->
       </p>
       <p>
