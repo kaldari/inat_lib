@@ -3,24 +3,17 @@
 /* File:            add_obs.php
  * Author:          Kyle Garsuta
  * Created:         25 Jun 2013
- * Last modified:   25 Jun 2013 by Kyle
  * POST:            User is registered with iNaturalist.org
  *
  * Description:     
  *  This program submits registers a user account based on the information
  *  provided by the user.
- *  
- *  See iNat API Reference: http://www.inaturalist.org/pages/api+reference
- *
- *  This program is in the early stages of development and serves as a rudimentary proof
- *  of concept.
  */
 
-// Site variables
-$base_url = "https://www.inaturalist.org";
+include_once "config.php";
 
 // Construct query string (i.e. from html post data)
-$query_string = "$base_url/users.json?";
+$query_string = "$inat_url/users.json?";
 foreach ($_POST as $key => $value) {
   if(($value != NULL) || ($value != "")){
     $query_string = $query_string . "user[" 
@@ -39,14 +32,17 @@ $opts = array(
 $context = stream_context_create($opts);
 $fp = fopen($query_string, 'r', false, $context);
 
-// Print server response
-$server_response = stream_get_contents($fp);
+if($fp) {
+  // Print server response
+  // $server_response = stream_get_contents($fp);
+  // echo $server_response;
 
-// TODO - iNat reply is in json format and has to be decoded
-// Hide response for now and display confirmation message
-echo $server_response;
-fclose($fp);
-echo "<p><h1>Thank you for your submission!</h1></p>";
-
-?>
-
+  fclose($fp);
+  header("Refresh: 3; url=$login_url");
+  echo "<center>You may now log in. Redirecting in 3 seconds...</center>";
+} else {
+  // Redirect to referrer; prompt for valid login
+  header("Refresh: 3; url=$register_url");
+  echo "<center>Failed to register, please try again. Redirecting in 3 seconds...</center>";
+  die();
+}

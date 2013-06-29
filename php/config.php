@@ -1,8 +1,27 @@
 <?php
 
-// Used in: login.php
+/* File:            config.php
+ * Author:          Kyle Garsuta
+ * Created:         27 Jun 2013
+ *
+ * Description:     
+ *  Contains important variables shared throughout the whole library.
+ */
+
+// Inaturalist secure url
+// Used in: login.php, register.php
 $inat_url = "https://www.inaturalist.org";
 
+// Register url
+// Used in: register.php
+$register_url = "http://localhost/inaturalist/register.html";
+
+// Register url
+// Used in: register.php, login.php
+$login_url = "http://localhost/inaturalist/login.html";
+
+// App information
+// Used in: login.php
 $client_id = "7d8200b28bcbd03f76550993813c55bd2bb46d6700624565867e8ccb499c9e0c";
 $client_secret = "49c6e64bc7c144560974635f52073cfcbe6e2a4a026267f4090303b86df77a7a";
 $redirect_uri = "http://localhost/inaturalist/callback.html";
@@ -24,5 +43,3 @@ $url_after_add_obs = $base_url;
 // Where to redirect after login?
 // Used in: login.php
 $url_after_login = $base_url;
-
-

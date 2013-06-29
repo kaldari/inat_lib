@@ -10,8 +10,9 @@
  *                  User automatically added to project
  *
  * Description:     
- *  This program submits an HTTP POST request using the iNaturalist.org API on behalf of a user. The user is then logged in
- *  using the provided username and password.
+ *  This program submits an HTTP POST request using the iNaturalist.org API
+ *  on behalf of a user. The user is then logged in using the provided 
+ *  username and password.
  */
 
 // config.php contains site info (e.g. client_id, client_secret, etc.)
@@ -73,7 +74,7 @@ if($fp) {
 
 } else {
   // Redirect to referrer; prompt for valid login
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  header("Refresh: 3; url=$login_url");
+  echo "<center>Invalid username or password. Please try again in 3 seconds...</center>";
   die();
 }
-

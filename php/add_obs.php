@@ -11,11 +11,6 @@
  *  This program submits an authenticated HTTP POST request
  *  using the iNaturalist.org API on behalf of a user. The user must have completed the
  *  OAuth 2.0 authentication proccess and obtained a valid access token.
- *  
- *  See iNat API Reference: http://www.inaturalist.org/pages/api+reference
- *
- *  This program is in the early stages of development and serves as a rudimentary proof
- *  of concept.
  */
 
 // Site variables
