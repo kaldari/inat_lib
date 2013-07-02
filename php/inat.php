@@ -5,18 +5,23 @@
  * Created:         2 Jul 2013
  *
  * Description:     
- *  This file contains functions used globally
+ *  This file contains functions used globally. See individual
+ *  functions for corresponding description.
  */
 
-// Include global config files
+// Include global config
 include_once "config.php";
 
 function login($user,$pass) {
 /*
  * PRE:   Valid username and password input
- * POST:  User is logged in
- *        Auth token saved to cookie 'inat_auth'
- *        User automatically added to project
+ * POST:  If VALID login:
+ *          User is logged in
+ *          Auth token saved to cookie 'inat_auth'
+ *          User automatically added to project
+ *          Returns TRUE
+ *        If INVALID login:
+ *          Returns FALSE
  *
  *  This program submits an HTTP POST request using the iNaturalist.org API
  *  on behalf of a user. The user is then logged in using the provided 
@@ -83,4 +88,8 @@ function login($user,$pass) {
   } else {
     return false;
   }
+}
+
+function add_obs_to_proj($obs_id,$proj_id) {
+  return true;
 }
