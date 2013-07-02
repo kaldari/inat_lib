@@ -1,8 +1,9 @@
 <?php
 
-/* File:            add_obs.php
+/* File:            register.php
  * Author:          Kyle Garsuta
  * Created:         25 Jun 2013
+ *
  * POST:            User is registered with iNaturalist.org
  *
  * Description:     

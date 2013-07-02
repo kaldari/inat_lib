@@ -1,5 +1,13 @@
 <?php
 
+/* File:            inat.php
+ * Author:          Kyle Garsuta
+ * Created:         2 Jul 2013
+ *
+ * Description:     
+ *  This file contains functions used globally
+ */
+
 // Include global config files
 include_once "config.php";
 
