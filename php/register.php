@@ -11,6 +11,7 @@
  */
 
 include_once "config.php";
+include_once "inat.php";
 
 // Construct query string (i.e. from html post data)
 $query_string = "$inat_url/users.json?";
@@ -38,8 +39,13 @@ if($fp) {
   // echo $server_response;
 
   fclose($fp);
-  header("Refresh: 3; url=$login_url");
-  echo "<center>You may now log in. Redirecting in 3 seconds...</center>";
+
+  // Automatically log user in after successful registration
+  if ( login($_POST['login'],$_POST['password']) ) {
+    header("Refresh: 3; url=$login_url");
+    echo "<center>You are now logged in. Redirecting in 3 seconds...</center>";
+    die();
+  }
 } else {
   // Redirect to referrer; prompt for valid login
   header("Refresh: 3; url=$register_url");
