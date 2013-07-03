@@ -25,12 +25,24 @@ $authorization = ucfirst($_COOKIE['inat_auth']);
 
 // Construct query string (i.e. from html post data)
 $query_string = $GLOBALS['inat_url'] . "/observations.json?";
+$index = 0;
 foreach ($_POST as $key => $value) {
-  if(($value != NULL) || ($value != "")){
-    $query_string = $query_string . "observation[" 
-      . urlencode($key) . "]=" . urlencode($value) . "&";
+  if( ($value != NULL) || ($value != "") ){
+    $field_type = substr( $key, strlen($key)-6, strlen($key) );
+
+    if( $field_type == 'stndrd' ) {
+      $query_string = $query_string . "observation[" 
+        . urlencode(substr($key, 0, -7)) . "]=" . urlencode($value) . "&";
+    } elseif ( $field_type == 'custom' ) {
+      // work here
+      var_dump( $index );
+      // left off here
+      $index++;
+    }
   }
 }
+
+echo $query_string;
 
 // Configure options for http post
 $opts = array(
