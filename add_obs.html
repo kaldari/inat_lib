@@ -20,8 +20,7 @@
     <fieldset>
       <p>
         <label for="species_guess">Species guess</label>
-        <select name="species_guess" />
-          <option value="Hippocampus">Unknown</option>
+        <select name="species_guess" required/>
           <option value="Hippocampus abdominalis">Hippocampus abdominalis</option>
           <option value="Hippocampus alatus">Hippocampus alatus</option>
           <option value="Hippocampus algiricus">Hippocampus algiricus</option>
@@ -74,12 +73,15 @@
       <p>
         <label for="id_please">ID please?</label>
         <select name="id_please">
-          <option value=""></option>
           <option value="1">Yes</option>
-          <option value="0">No</option>
+          <option selected="0">No</option>
         </select>
         <!--Allowed values: 0 | 1-->
         
+      </p>
+      <p>
+        <label for="date">Date observed</label>
+        <input type="date" name="date" required></textarea>
       </p>
       <p>
         <label for="description"></label>
@@ -89,14 +91,14 @@
       <p>
         <label for="latitude">Latitude</label>
         <input type="number" name="latitude" step="0.00001" 
-          min="-90.00000" max="90.00000" pattern=".{-90,90}">
+          min="-90.00000" max="90.00000" pattern=".{-90,90}" required>
         <!--Allowed values: -90 to 90-->
         <!--Should implement google maps before deployment-->
       </p>
       <p>
         <label for="longitude">LatitudeLongitude</label>
         <input type="number" name="longitude" step="0.00001" 
-          min="-180.00000" max="180.00000" pattern=".{-180,180}">
+          min="-180.00000" max="180.00000" pattern=".{-180,180}" required>
         <!--Allowed values: -180 to 180-->
       </p>
       <p>
@@ -107,6 +109,43 @@
           <option value="private">private</option>
         </select>
         <!--Allowed values: open | obscured | private-->
+      </p>
+      <p>
+        <label for="region">Region</label>
+        <select name="region" required/>
+          <option></option>
+          <option>West Indian Ocean and Red Sea</option>
+          <option>East Atlantic and Mediterannean</option>
+          <option>Eastern Pacific</option>
+          <option>Indo-Pacific</option>
+          <option>West Atlantic</option>
+          <option>Australia and New Zealand</option>
+        </select>
+      </p>
+      <p>
+        <label for="habitat">Seahorse habitat</label>
+        <select name="habitat" required/>
+          <option>Artificial</option>
+          <option>Coral</option>
+          <option>Mangrove</option>
+          <option>Mud</option>
+          <option>Rock</option>
+          <option>Rubble</option>
+          <option>Sand</option>
+          <option>Seagrass</option>
+          <option>Seawead/algae</option>
+          <option>Other (shells, etc.)</option>
+          <option selected>Unknown</option>
+        </select>
+      </p>
+      <p>
+        <label for="activity">Type of activity</label>
+        <select name="activity" required/>
+          <option></option>
+          <option>Underwater</option>
+          <option>Fishing</option>
+          <option>From land</option>
+        </select>
       </p>
       <p>
         <input type="submit" />
