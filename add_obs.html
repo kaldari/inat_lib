@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="css/inat.css">
   <script src="js/jquery/jquery-1.10.1.min.js"></script>
   <script src="js/jquery/plugins/jquery-validate/jquery.validate.min.js"></script>
+  <script src="js/inat.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
       $("#form").validate();
@@ -116,46 +117,17 @@
 
     <fieldset id='custom_fields'>
     <!--CUSTOM FIELDS-->
-    <!--Syntax: name="fieldID_custom"-->
-      <p>
-        <label for="region_custom">Region</label>
-        <select name="region_custom" required/>
-          <option></option>
-          <option>West Indian Ocean and Red Sea</option>
-          <option>East Atlantic and Mediterannean</option>
-          <option>Eastern Pacific</option>
-          <option>Indo-Pacific</option>
-          <option>West Atlantic</option>
-          <option>Australia and New Zealand</option>
-        </select>
-      </p>
-      <p>
-        <label for="habitat_custom">Seahorse habitat</label>
-        <select name="habitat_custom" required/>
-          <option>Artificial</option>
-          <option>Coral</option>
-          <option>Mangrove</option>
-          <option>Mud</option>
-          <option>Rock</option>
-          <option>Rubble</option>
-          <option>Sand</option>
-          <option>Seagrass</option>
-          <option>Seawead/algae</option>
-          <option>Other (shells, etc.)</option>
-          <option selected>Unknown</option>
-        </select>
-      </p>
-      <p>
-        <label for="activity_custom">Type of activity</label>
-        <select name="activity_custom" required/>
-          <option></option>
-          <option>Underwater</option>
-          <option>Fishing</option>
-          <option>From land</option>
-        </select>
-      </p>
+      <script type="text/javascript">
+        // Convert local json to object
+        var obj = json_to_obj("inat/iseahorse.json");
+
+        // Convert js obj to html form equivalent
+        var html_fields = obj_to_html_fields(obj);
+
+        // Write project fields data
+        document.write(html_fields);
+      </script>
     </fieldset>
-    
     <fieldset id='policy'>
       <p>
         <input type="submit" />

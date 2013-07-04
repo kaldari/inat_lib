@@ -7,29 +7,22 @@
   <link rel="stylesheet" type="text/css" href="css/inat.css">
   <script src="js/jquery/jquery-1.10.1.min.js"></script>
   <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
+  <script src="js/inat.js"></script>
 </head>
 <body>
   <form id="custom_fields">
-  </form>
-  <form>
-    This is a test.
-  </form>
   <script type="text/javascript">
+    // Convert local json to object
+    var obj = json_to_obj("inat/iseahorse.json");
 
-    // Read local project.json file
-    var request = new XMLHttpRequest();
-    request.open( "GET", "inat/iseahorse.json", false );
-    // Same origin policy won't allow external url
-    // Would be ideal to find a way to implement this later
-    request.setRequestHeader("User-Agent",navigator.userAgent);
-    request.send(null);
-    proj_json = (request.responseText);
+    // Convert js obj to html form equivalent
+    var html_fields = obj_to_html_fields(obj);
 
-    obj = JSON.parse(proj_json);
-    alert(obj.project_observation_fields[0].id);
-  
-    $("#custom_fields").append(" <b>Appended text</b>.");
-    alert('test');
+    // Write form data
+    document.write(html_fields);
+
+alert(text.match(pattern)); //-> Tue
   </script>
+  </form>
 </body>
 </html>
