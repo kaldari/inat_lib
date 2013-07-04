@@ -31,32 +31,42 @@ function obj_to_html_fields(obj) {
   var i = 0;
   while( i <= 21 ) {
 
+    obs_field = obj.project_observation_fields[i].observation_field;
     html = html + "<p>\n";
 
     // <label for="field_id">field_name</label>
-    html = html + "<label for='" +
-      obj.project_observation_fields[i].observation_field.id + "'>" + 
-      obj.project_observation_fields[i].observation_field.name + "</label>\n";
+    html = html + "<label for='" + obs_field.id + "'>" + obs_field.name + "</label>\n";
 
-    if( obj.project_observation_fields[i].observation_field.allowed_values == "" ) {
-    // If text field
+    if( obs_field.allowed_values == "" ) {
+    // If text/numeric field
       
-      // <input type="text" name="field_id" ></input>
-      html = html + "<input type='text' name='" +
-        obj.project_observation_fields[i].observation_field.id + "'></input>\n";
+      // <input type="type" name="field_id" ></input>
+      html = html + "<input type='";  
+
+      if (obs_field.datatype=="text") {
+      // If text
+        html = html + "text";
+      } else if (obs_field.datatype=="numeric") {
+      // If numeric
+        html = html + "number";
+      }
+
+      html = html + "' name='" +
+        obs_field.id + "'></input>\n";
     } else {
     // Else if dropdown list - assume iNat only has text fields OR dropdown lists
       
       // <select name="field_id"/>
-      html = html + "<select name='" + 
-        obj.project_observation_fields[i].observation_field.id + "'";
+      html = html + "<select name='" + obs_field.id + "'";
       
-      if(obj.project_observation_fields[i].required) html = html + "required";
+      if(obj.project_observation_fields[i].required) {
+        html = html + "required";
+      }
     
       html = html + "/>";
       
       // Convert delimitted option values into an array
-      var options = obj.project_observation_fields[i].observation_field.allowed_values.split("|");
+      var options = obs_field.allowed_values.split("|");
 
       for(x=0; x < options.length; x++) {
         //<option value="Hippocampus abdominalis">Hippocampus abdominalis</option>
