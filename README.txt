@@ -29,6 +29,6 @@ Latest deployment can be found at: http://iseahorse.org/inat_test/
 
 Instructions
 
-1. Save the following file at https://www.inaturalist.org/projects/'project'.json, where 'project' is the name of your project (e.g. https://www.inaturalist.org/projects/iseahorse.json), to ~/inat/project.json (rename your 'project'.json to project.json)
+1. Save the file at https://www.inaturalist.org/projects/'project'.json, where 'project' is the name of your project (e.g. https://www.inaturalist.org/projects/iseahorse.json), to ~/inat/project.json (rename your 'project'.json to project.json)
 
 2. 

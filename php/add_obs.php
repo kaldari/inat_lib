@@ -25,30 +25,35 @@ $authorization = ucfirst($_COOKIE['inat_auth']);
 
 // Construct query string (i.e. from html post data)
 $query_string = $GLOBALS['inat_url'] . "/observations.json?";
-$index = 0;
+$post_content = array();
+
 foreach ($_POST as $key => $value) {
   if( ($value != NULL) || ($value != "") ){
     $field_type = substr( $key, strlen($key)-6, strlen($key) );
 
     if( $field_type == 'stndrd' ) {
-      $query_string = $query_string . "observation[" 
-        . urlencode(substr($key, 0, -7)) . "]=" . urlencode($value) . "&";
-    } elseif ( $field_type == 'custom' ) {
-      // work here
-      var_dump( $index );
-      // left off here
-      $index++;
+      $key_ = substr($key, 0, -7);
+      $post_content["observation[$key_]"] = $value;
+
+    } else {
+      $post_content["observation[observation_field_values_attributes[$key][observation_field_id]]"] = $key;
+      $post_content["observation[observation_field_values_attributes[$key][value]]"] = $value;
+      // Code for custom fields here
+      //echo "key is $key, value is $value" . "_";
     }
   }
 }
 
-echo $query_string;
+$post = http_build_query($post_content);
 
 // Configure options for http post
 $opts = array(
   'http'=>array(
-    'method'=>"POST",
-    'header'=>"Authorization: $authorization"
+    'method' => "POST",
+    'header' => "Content-Type: application/x-www-form-urlencoded" . "\r\n" .
+                "Content-Length: ". strlen($post) . "\r\n" .
+                "Authorization: $authorization" . "\r\n",
+    'content' => $post,
   )
 );
 
@@ -67,8 +72,6 @@ if($fp) {
   // Extract observation id
   $obs_id = $response->{'id'};
 
-  // TODO - iNat reply is in json format and has to be decoded
-  // Hide response for now and display confirmation message
 } else {
   echo "<p><center><h1>Submission error!</center></h1></p>";
 }
