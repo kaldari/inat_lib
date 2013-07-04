@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>iNaturalist | Home</title>
+  <meta name="description" content="iNaturalist home">
+  <meta name="author" content="Kyle Garsuta">
+  <link rel="stylesheet" type="text/css" href="css/inat.css">
+  <script src="js/jquery/jquery-1.10.1.min.js"></script>
+  <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
+  <script type="text/javascript">
+    // Read local project.json file
+    var oRequest = new XMLHttpRequest();
+    oRequest.open( "GET", "inat/iseahorse.json", false );
+    oRequest.setRequestHeader("User-Agent",navigator.userAgent);
+    oRequest.send(null)
+    if (oRequest.status==200) var proj_json = (oRequest.responseText);
+    else alert("Error executing XMLHttpRequest call!");
+
+    obj = JSON.parse(proj_json);
+    alert(obj.project_observation_fields[0].id);
+  </script>
+</head>
+<body>
+<div></div>
+<div>
+</div>
+</body>
+</html>
