@@ -9,8 +9,10 @@
   <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
 </head>
 <body>
+  <form id="custom_fields">
+  </form>
   <form>
-    
+    This is a test.
   </form>
   <script type="text/javascript">
 
@@ -26,7 +28,7 @@
     obj = JSON.parse(proj_json);
     alert(obj.project_observation_fields[0].id);
   
-    $("form").append(" <b>Appended text</b>.");
+    $("#custom_fields").append(" <b>Appended text</b>.");
     alert('test');
   </script>
 </body>
