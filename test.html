@@ -7,22 +7,27 @@
   <link rel="stylesheet" type="text/css" href="css/inat.css">
   <script src="js/jquery/jquery-1.10.1.min.js"></script>
   <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
+</head>
+<body>
+  <form>
+    
+  </form>
   <script type="text/javascript">
+
     // Read local project.json file
-    var oRequest = new XMLHttpRequest();
-    oRequest.open( "GET", "inat/iseahorse.json", false );
-    oRequest.setRequestHeader("User-Agent",navigator.userAgent);
-    oRequest.send(null)
-    if (oRequest.status==200) var proj_json = (oRequest.responseText);
-    else alert("Error executing XMLHttpRequest call!");
+    var request = new XMLHttpRequest();
+    request.open( "GET", "inat/iseahorse.json", false );
+    // Same origin policy won't allow external url
+    // Would be ideal to find a way to implement this later
+    request.setRequestHeader("User-Agent",navigator.userAgent);
+    request.send(null);
+    proj_json = (request.responseText);
 
     obj = JSON.parse(proj_json);
     alert(obj.project_observation_fields[0].id);
+  
+    $("form").append(" <b>Appended text</b>.");
+    alert('test');
   </script>
-</head>
-<body>
-<div></div>
-<div>
-</div>
 </body>
 </html>
