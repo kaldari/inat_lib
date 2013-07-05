@@ -51,8 +51,10 @@ if($response) {
   $response = substr($response, 1, -1);
   $response = json_decode($response);  
   
+  global $proj_id;  
+
   // Add obs to project
-  add_obs_to_proj($response->{'id'});
+  add_obs_to_proj($response->{'id'}, $proj_id);
 
 } else {
   echo "<p><center><h1>Submission error!</center></h1></p>";

@@ -105,9 +105,22 @@ function login($user,$pass) {
   }
 }
 
-function add_obs_to_proj($obs_id) {
+function add_obs_to_proj($obs_id, $proj_id) {
+/*
+ * This helper function adds an obs with
+ * the given obs_id to the project
+ *
+ * PRE:   Valid obs_id and proj_id
+ * POST:  If VALID login:
+ *          User is logged in
+ *          Auth token saved to cookie 'inat_auth'
+ *          User automatically added to project
+ *          Returns TRUE
+ *        If INVALID login:
+ *          Returns FALSE
+ */
 
-  global $inat_url, $proj_id;
+  global $inat_url;
   
   $content = array();
   $content["project_observation[observation_id]"] = $obs_id;

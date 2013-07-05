@@ -9,11 +9,9 @@
  */
 
 // Inaturalist secure url
-// Used in: login.php, register.php
 $inat_url = "https://www.inaturalist.org";
 
 // Register url
-// Used in: register.php
 $register_url = "http://localhost/inaturalist/register.html";
 
 // Register url
