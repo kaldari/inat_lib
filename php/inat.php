@@ -12,8 +12,47 @@
 // Include global config
 include_once "config.php";
 
+function http_post($header,$content,$url) {
+/*
+ * A helper function to perform an http given a
+ *  string containing the header and an array
+ *  containing the content, to the given url.
+ * Content-Type and Content-Length headers are
+ *  automatically generated.
+ *  
+ *  PRE: Valid header string
+ *    (e.g. "Authorization: token_here" . "\r\n"),
+ *    valid content array, and
+ *    valid url
+ *  POST: http post request performed
+ *    Returns file pointer on success
+ *    Returns false on error
+ */
+
+  $content = http_build_query($content);
+
+  // Configure options for http post
+  $opts = array(
+    'http'=>array(
+      'method'=>"POST",
+      'header' => "Content-Type: application/x-www-form-urlencoded" . "\r\n" .
+                  "Content-Length: ". strlen($content) . "\r\n" . 
+                  $header,
+      'content' => $content,
+    )
+  );
+
+  // Send http post request
+  $context = stream_context_create($opts);
+  return fopen($url, 'r', false, $context);
+}
+
 function login($user,$pass) {
 /*
+ *  This program submits an HTTP POST request using the iNaturalist.org API
+ *  on behalf of a user. The user is then logged in using the provided 
+ *  username and password.
+ *
  * PRE:   Valid username and password input
  * POST:  If VALID login:
  *          User is logged in
@@ -22,40 +61,24 @@ function login($user,$pass) {
  *          Returns TRUE
  *        If INVALID login:
  *          Returns FALSE
- *
- *  This program submits an HTTP POST request using the iNaturalist.org API
- *  on behalf of a user. The user is then logged in using the provided 
- *  username and password.
 */
 
   // Declare global variables from 'config.php'
   global $inat_url, $logged_in_days, $project;
 
   // Configure post body
-  $post = http_build_query(array(
-      "username" => $user,
-      "password" => $pass,
-      "client_id" => $GLOBALS['client_id'],
-      "client_secret" => $GLOBALS['client_secret'],
-      "redirect_uri" => $GLOBALS['redirect_uri'],
-      "grant_type" => 'password',
-      'response_type' => 'token',
-  ));
+  $content = array();
+  $content["username"] = $user;
+  $content["password"] = $pass;
+  $content["client_id"] = $GLOBALS['client_id'];
+  $content["client_secret"] = $GLOBALS['client_secret'];
+  $content["redirect_uri"] = $GLOBALS['redirect_uri'];
+  $content["grant_type"] = "password";
+  $content["response_type"] = "token";
+  $content["username"] = $user;
 
-  // Configure options for http post
-  $opts = array(
-    'http'=>array(
-      'method'=>"POST",
-      'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
-                  "Content-Length: ". strlen($post) . "\r\n",  
-      'content' => $post,
-    )
-  );
+  $fp = http_post("",$content,"$inat_url/oauth/token");
 
-  // Send http post request
-  $query_string = "$inat_url/oauth/token";
-  $context = stream_context_create($opts);
-  $fp = fopen($query_string, 'r', false, $context);
   if($fp) {
     // Parse server response
     $response = json_decode(stream_get_contents($fp));
@@ -72,15 +95,8 @@ function login($user,$pass) {
     setcookie('inat_auth', $cookie_value, $expiry, '/');
 
     // Add user to project
-    $authorization = ucfirst($cookie_value);
-    $opts = array(
-      'http'=>array(
-        'method'=>"POST",
-        'header'=>"Authorization: $authorization",
-      )
-    );
-    $context = stream_context_create($opts);
-    fopen("$inat_url/projects/$project/join", 'r', false, $context);
+    $header = "Authorization: ". ucfirst($cookie_value) . "\r\n";
+    http_post($header,$content,"$inat_url/projects/$project/join");
     // Failure to join project does not affect login
 
     return true;
@@ -93,3 +109,5 @@ function login($user,$pass) {
 function add_obs_to_proj($obs_id,$proj_id) {
   return true;
 }
+
+

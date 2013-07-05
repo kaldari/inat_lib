@@ -21,11 +21,11 @@ include_once "inat.php";
 
 // Construct authorization string from cookie
 // Capitalize 'Bearer' as iNat server won't accept 'bearer'
-$authorization = ucfirst($_COOKIE['inat_auth']);
+$authorization = "Authorization: ". ucfirst($_COOKIE['inat_auth'] . "\r\n");
 
 // Construct query string (i.e. from html post data)
-$query_string = $GLOBALS['inat_url'] . "/observations.json?";
-$post_content = array();
+$url = $GLOBALS['inat_url'] . "/observations.json?";
+$content = array();
 
 foreach ($_POST as $key => $value) {
   if( ($value != NULL) || ($value != "") ){
@@ -33,33 +33,18 @@ foreach ($_POST as $key => $value) {
 
     if( $field_type == 'stndrd' ) {
       $key_ = substr($key, 0, -7);
-      $post_content["observation[$key_]"] = $value;
+      $content["observation[$key_]"] = $value;
 
     } else {
-      $post_content["observation[observation_field_values_attributes[$key][observation_field_id]]"] = $key;
-      $post_content["observation[observation_field_values_attributes[$key][value]]"] = $value;
-      // Code for custom fields here
-      //echo "key is $key, value is $value" . "_";
+      $content["observation[observation_field_values_attributes[$key][observation_field_id]]"] = $key;
+      $content["observation[observation_field_values_attributes[$key][value]]"] = $value;
     }
   }
 }
 
-$post = http_build_query($post_content);
+$header = $authorization . "\r\n";
+$fp = http_post($header,$content,$url);
 
-// Configure options for http post
-$opts = array(
-  'http'=>array(
-    'method' => "POST",
-    'header' => "Content-Type: application/x-www-form-urlencoded" . "\r\n" .
-                "Content-Length: ". strlen($post) . "\r\n" .
-                "Authorization: $authorization" . "\r\n",
-    'content' => $post,
-  )
-);
-
-// Send http post request
-$context = stream_context_create($opts);
-$fp = fopen($query_string, 'r', false, $context);
 if($fp) {
   echo "<p><center><h1>Submission success!</center></h1></p>";
   

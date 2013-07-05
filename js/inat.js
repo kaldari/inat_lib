@@ -1,11 +1,22 @@
+/* File:            inat.js
+ * Author:          Kyle Garsuta
+ * Created:         4 Jul 2013
+ *
+ * Description:     
+ *  This file contains functions used globally. See individual
+ *  functions for corresponding description.
+ */
+
 function json_to_obj(url) {
-// A helper function that reads a local
-// json file and returns the corresponding
-// js object
-//
-// PRE: Valid local json file
-// POST: Returns js object
-  
+/*
+ * A helper function that reads a local
+ * json file and returns the corresponding
+ * js object
+ *
+ * PRE: Valid local json file
+ * POST: Returns js object
+ */  
+
   // Read local project.json file
   var request = new XMLHttpRequest();
   request.open( "GET", url, false );
@@ -20,13 +31,15 @@ function json_to_obj(url) {
 }
 
 function obj_to_html_fields(obj) {
-// A function that takes a js object
-// then converts the fields to corresonding
-// html fields
-//
-// PRE: Valid inat project object 
-//  (e.g. from inaturalist.org/projects/iSeahorse.json)
-// POST: Returns html form equivalent
+/*
+ * A function that takes a js object
+ * then converts the fields to corresonding
+ * html fields
+ *
+ * PRE: Valid inat project object 
+ *  (e.g. from inaturalist.org/projects/iSeahorse.json)
+ * POST: Returns html form equivalent
+ */
   var html = "";
   var i = 0;
   while( i <= 21 ) {
