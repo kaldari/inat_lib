@@ -29,6 +29,10 @@ Latest deployment can be found at: http://iseahorse.org/inat_test/
 
 Instructions
 
-1. Save the file at https://www.inaturalist.org/projects/'project'.json, where 'project' is the name of your project (e.g. https://www.inaturalist.org/projects/iseahorse.json), to ~/inat/project.json (rename your 'project'.json to project.json)
+1.0 Setting up the project JSON
 
-2. 
+  1.1 Download the file at https://www.inaturalist.org/projects/'project'.json, where 'project' is the name of your project (e.g. https://www.inaturalist.org/projects/iseahorse.json).
+
+  2.2 Change the name of the file you downloaded in (1) from 'project'.json to project.json (e.g. iseahorse.json to project.json)
+
+  3.3 Move the file in (2) to ~/inat/, where ~ is the root of your library (i.e. the file location is ~/inat/project.json).
