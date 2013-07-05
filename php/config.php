@@ -29,6 +29,7 @@ $redirect_uri = "http://localhost/inaturalist/callback.html";
 // Project name
 // Used in: login.php
 $project = "iseahorse";
+$proj_id = 871;
 
 // Set a default value for how long to stay logged in
 // Used in: login.php

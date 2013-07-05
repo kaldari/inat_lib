@@ -25,7 +25,7 @@ function http_post($header,$content,$url) {
  *    valid content array, and
  *    valid url
  *  POST: http post request performed
- *    Returns file pointer on success
+ *    Returns a string of server response on success
  *    Returns false on error
  */
 
@@ -44,7 +44,7 @@ function http_post($header,$content,$url) {
 
   // Send http post request
   $context = stream_context_create($opts);
-  return fopen($url, 'r', false, $context);
+  return stream_get_contents(fopen($url, 'r', false, $context));
 }
 
 function login($user,$pass) {
@@ -77,12 +77,11 @@ function login($user,$pass) {
   $content["response_type"] = "token";
   $content["username"] = $user;
 
-  $fp = http_post("",$content,"$inat_url/oauth/token");
+  $response = http_post("",$content,"$inat_url/oauth/token");
 
-  if($fp) {
+  if($response) {
     // Parse server response
-    $response = json_decode(stream_get_contents($fp));
-    fclose($fp);
+    $response = json_decode($response);
 
     // Set cookie based on parsed data
     $cookie_value = $response->{'token_type'} . ' ' . $response->{'access_token'};
@@ -106,8 +105,15 @@ function login($user,$pass) {
   }
 }
 
-function add_obs_to_proj($obs_id,$proj_id) {
-  return true;
+function add_obs_to_proj($obs_id) {
+
+  global $inat_url, $proj_id;
+  
+  $content = array();
+  $content["project_observation[observation_id]"] = $obs_id;
+  $content["project_observation[project_id]"] = $proj_id;
+  $header = "Authorization: ". ucfirst($_COOKIE['inat_auth']) . "\r\n";
+  return http_post($header,$content,"$inat_url/project_observations");
 }
 
 

@@ -21,7 +21,6 @@ include_once "inat.php";
 
 // Construct authorization string from cookie
 // Capitalize 'Bearer' as iNat server won't accept 'bearer'
-$authorization = "Authorization: ". ucfirst($_COOKIE['inat_auth'] . "\r\n");
 
 // Construct query string (i.e. from html post data)
 $url = $GLOBALS['inat_url'] . "/observations.json?";
@@ -42,20 +41,18 @@ foreach ($_POST as $key => $value) {
   }
 }
 
-$header = $authorization . "\r\n";
-$fp = http_post($header,$content,$url);
+$header = "Authorization: ". ucfirst($_COOKIE['inat_auth']) . "\r\n";
+$response = http_post($header,$content,$url);
 
-if($fp) {
+if($response) {
   echo "<p><center><h1>Submission success!</center></h1></p>";
-  
-  // Parse server response
-  $response = stream_get_contents($fp);
+
   // Strip enclosing ] and [
   $response = substr($response, 1, -1);
   $response = json_decode($response);  
   
-  // Extract observation id
-  $obs_id = $response->{'id'};
+  // Add obs to project
+  add_obs_to_proj($response->{'id'});
 
 } else {
   echo "<p><center><h1>Submission error!</center></h1></p>";
