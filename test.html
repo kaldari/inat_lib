@@ -1,18 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>iNaturalist | Home</title>
-  <meta name="description" content="iNaturalist home">
+  <title>iNaturalist | Add observation</title>
+  <meta name="description" content="iNaturalist add obervation">
+  <meta name="keywords" content="HTML,CSS,JavaScript">
   <meta name="author" content="Kyle Garsuta">
+  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/inat.css">
+  <link rel="stylesheet" type="text/css" href="css/gmap.css">
   <script src="js/jquery/jquery-1.10.1.min.js"></script>
-  <script src="js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
+  <script src="js/jquery/plugins/jquery-validate/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="js/inat.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#form").validate();
+    });
+  </script>
 </head>
 <body>
-  <form id="custom_fields">
-<a href="#" title="mouse over description here">normal text</a>
+  <form action="php/add_obs.php" method="post" id="form">
+    <fieldset id='stndrd_fields'>
+    <!--STANDARD FIELDS-->
+    <!--Syntax: id='inat_field_name_stndrd'-->
+      <p>
+        <label for="species_guess_stndrd">Species guess</label>
+        <select name="species_guess_stndrd" required/>
+          <option value="Hippocampus abdominalis">Hippocampus abdominalis</option>
+          <option value="Hippocampus alatus">Hippocampus alatus</option>
+          <option value="Hippocampus algiricus">Hippocampus algiricus</option>
+          <option value="Hippocampus angustus">Hippocampus angustus</option>
+          <option value="Hippocampus barbouri">Hippocampus barbouri</option>
+          <option value="Hippocampus bargibanti">Hippocampus bargibanti</option>
+          <option value="Hippocampus biocellatus">Hippocampus biocellatus</option>
+          <option value="Hippocampus borboniensis">Hippocampus borboniensis</option>
+          <option value="Hippocampus breviceps">Hippocampus breviceps</option>
+          <option value="Hippocampus camelopardalis">Hippocampus camelopardalis</option>
+          <option value="Hippocampus capensis">Hippocampus capensis</option>
+          <option value="Hippocampus colemani">Hippocampus colemani</option>
+          <option value="Hippocampus comes">Hippocampus comes</option>
+          <option value="Hippocampus coronatus">Hippocampus coronatus</option>
+          <option value="Hippocampus debelius">Hippocampus debelius</option>
+          <option value="Hippocampus denise">Hippocampus denise</option>
+          <option value="Hippocampus erectus">Hippocampus erectus</option>
+          <option value="Hippocampus fisheri">Hippocampus fisheri</option>
+          <option value="Hippocampus fuscus">Hippocampus fuscus</option>
+          <option value="Hippocampus guttulatus">Hippocampus guttulatus</option>
+          <option value="Hippocampus hippocampus">Hippocampus hippocampus</option>
+          <option value="Hippocampus histrix">Hippocampus histrix</option>
+          <option value="Hippocampus ingens">Hippocampus ingens</option>
+          <option value="Hippocampus jayakari">Hippocampus jayakari</option>
+          <option value="Hippocampus jugumus">Hippocampus jugumus</option>
+          <option value="Hippocampus kelloggi">Hippocampus kelloggi</option>
+          <option value="Hippocampus kuda">Hippocampus kuda</option>
+          <option value="Hippocampus lichtensteinii">Hippocampus lichtensteinii</option>
+          <option value="Hippocampus minotaur">Hippocampus minotaur</option>
+          <option value="Hippocampus mohnikei">Hippocampus mohnikei</option>
+          <option value="Hippocampus montebelloensis">Hippocampus montebelloensis</option>
+          <option value="Hippocampus patagonicus">Hippocampus patagonicus</option>
+          <option value="Hippocampus pontohi">Hippocampus pontohi</option>
+          <option value="Hippocampus procerus">Hippocampus procerus</option>
+          <option value="Hippocampus pusillus">Hippocampus pusillus</option>
+          <option value="Hippocampus reidi">Hippocampus reidi</option>
+          <option value="Hippocampus satomiae">Hippocampus satomiae</option>
+          <option value="Hippocampus severnsi">Hippocampus severnsi</option>
+          <option value="Hippocampus sindonis">Hippocampus sindonis</option>
+          <option value="Hippocampus spinosissimus">Hippocampus spinosissimus</option>
+          <option value="Hippocampus subelongatus">Hippocampus subelongatus</option>
+          <option value="Hippocampus trimaculatus">Hippocampus trimaculatus</option>
+          <option value="Hippocampus tyro">Hippocampus tyro</option>
+          <option value="Hippocampus waleananus">Hippocampus waleananus</option>
+          <option value="Hippocampus whitei">Hippocampus whitei</option>
+          <option value="Hippocampus zebra">Hippocampus zebra</option>
+          <option value="Hippocampus zosterae">Hippocampus zosterae</option>
+        </select>
+      </p>
+      <p>
+        <label for="id_please_stndrd">ID please?</label>
+        <select name="id_please_stndrd">
+          <option value="1">Yes</option>
+          <option selected="0">No</option>
+        </select>
+        <!--Allowed values: 0 | 1-->
+        
+      </p>
+      <p>
+        <label for="observed_on_string_stndrd">Date observed</label>
+        <input type="date" name="observed_on_string_stndrd" required></textarea>
+      </p>
+      <p>
+        <label for="description_stndrd"></label>
+        <textarea name="description_stndrd" cols="25" rows="5" placeholder="Description"></textarea>
+        <!--Allowed values: Any-->
+      </p>
+      <p>
+        <div id="canvas"></div>
+        <label for="latitude_stndrd">Latitude:</label>
+        <input id="latitude_stndrd" type="number"
+          min="-90.00000" max="90.00000" required />
+        <label for="longitude_stndrd">Longitude:</label>
+        <input id="longitude_stndrd" type="number"
+          min="-180.00000" max="180.00000" required />
+        <script src="js/gmap.js"></script>
+        </div>
+      </p>
+      <p>
+        <label for="geoprivacy_stndrd">Geoprivacy</label>
+        <select name="geoprivacy_stndrd">
+          <option value="open">open</option>
+          <option selected="obscured">obscured</option>
+          <option value="private">private</option>
+        </select>
+        <!--Allowed values: open | obscured | private-->
+      </p>
+    </fieldset>
 
-  </form>
+    <fieldset id='project_fields'>
+    <!--CUSTOM FIELDS-->
+      <script type="text/javascript">
+        // Convert local json to object
+        var obj = json_to_obj("inat/iseahorse.json");
+
+        // Convert js obj to html form equivalent
+        var html_fields = obj_to_html_fields(obj);
+
+        // Write project fields data
+        document.write(html_fields);
+      </script>
+    </fieldset>
+    <fieldset id='policy'>
+      <p>
+        <input type="submit" />
+      </p>
+    </fieldset>
+</form>
 </body>
 </html>

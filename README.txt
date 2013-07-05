@@ -27,7 +27,7 @@ The following html files can be embedded as objects on any webpage:
 See iNat API Reference: http://www.inaturalist.org/pages/api+reference
 Latest deployment can be found at: http://iseahorse.org/inat_test/
 
-Instructions
+Installation Instructions
 
 1.0 Setting up the project JSON
 
