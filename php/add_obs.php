@@ -23,7 +23,6 @@ include_once "inat.php";
 // Capitalize 'Bearer' as iNat server won't accept 'bearer'
 
 // Construct query string (i.e. from html post data)
-$url = $GLOBALS['inat_url'] . "/observations.json?";
 $content = array();
 
 foreach ($_POST as $key => $value) {
@@ -42,7 +41,7 @@ foreach ($_POST as $key => $value) {
 }
 
 $header = "Authorization: ". ucfirst($_COOKIE['inat_auth']) . "\r\n";
-$response = http_post($header,$content,$url);
+$response = http_post($header,$content,"https://www.inaturalist.org/observations.json?");
 
 if($response) {
   echo "<p><center><h1>Submission success!</center></h1></p>";

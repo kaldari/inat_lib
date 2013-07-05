@@ -64,7 +64,7 @@ function login($user,$pass) {
 */
 
   // Declare global variables from 'config.php'
-  global $inat_url, $logged_in_days, $project;
+  global $logged_in_days, $project;
 
   // Configure post body
   $content = array();
@@ -77,7 +77,7 @@ function login($user,$pass) {
   $content["response_type"] = "token";
   $content["username"] = $user;
 
-  $response = http_post("",$content,"$inat_url/oauth/token");
+  $response = http_post("",$content,"https://www.inaturalist.org/oauth/token");
 
   if($response) {
     // Parse server response
@@ -95,7 +95,7 @@ function login($user,$pass) {
 
     // Add user to project
     $header = "Authorization: ". ucfirst($cookie_value) . "\r\n";
-    http_post($header,$content,"$inat_url/projects/$project/join");
+    http_post($header,$content,"https://www.inaturalist.org/projects/$project/join");
     // Failure to join project does not affect login
 
     return true;
@@ -107,8 +107,8 @@ function login($user,$pass) {
 
 function add_obs_to_proj($obs_id, $proj_id) {
 /*
- * This helper function adds an obs with
- * the given obs_id to the project
+ * This helper function adds an obs with the given
+ * obs_id to the project with given proj_id
  *
  * PRE:   Valid obs_id and proj_id
  * POST:  If VALID login:
@@ -119,14 +119,12 @@ function add_obs_to_proj($obs_id, $proj_id) {
  *        If INVALID login:
  *          Returns FALSE
  */
-
-  global $inat_url;
   
   $content = array();
   $content["project_observation[observation_id]"] = $obs_id;
   $content["project_observation[project_id]"] = $proj_id;
   $header = "Authorization: ". ucfirst($_COOKIE['inat_auth']) . "\r\n";
-  return http_post($header,$content,"$inat_url/project_observations");
+  return http_post($header,$content,"https://www.inaturalist.org/project_observations");
 }
 
 
