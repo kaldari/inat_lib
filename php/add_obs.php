@@ -49,11 +49,15 @@ if($response) {
   // Strip enclosing ] and [
   $response = substr($response, 1, -1);
   $response = json_decode($response);  
+  $obs_id = $response->{'id'};
+
+  // Post all photos
+  post_photos($obs_id);
   
   global $proj_id;  
 
   // Add obs to project
-  add_obs_to_proj($response->{'id'}, $proj_id);
+  add_obs_to_proj($obs_id, $proj_id);
 
 } else {
   echo "<p><center><h1>Submission error!</center></h1></p>";

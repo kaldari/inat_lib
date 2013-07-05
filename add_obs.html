@@ -19,7 +19,7 @@
   </script>
 </head>
 <body>
-  <form action="php/add_obs.php" method="post" id="form">
+  <form action="php/add_obs.php" method="post" id="form" enctype="multipart/form-data">
     <fieldset id='stndrd_fields'>
     <!--STANDARD FIELDS-->
     <!--Syntax: id='inat_field_name_stndrd'-->
@@ -90,7 +90,7 @@
       </p>
       <p>
         <label for="description_stndrd"></label>
-        <textarea name="description_stndrd" cols="25" rows="5" placeholder="Description"></textarea>
+        <textarea name="description_stndrd" cols="50" rows="5" placeholder="Description"></textarea>
         <!--Allowed values: Any-->
       </p>
       <p>
@@ -113,6 +113,11 @@
         </select>
         <!--Allowed values: open | obscured | private-->
       </p>
+    </fieldset>
+
+    <fieldset id='photo_upload'>
+      <label for="photo_upload_photo">Photo</label>
+      <input id="photo_upload_photo" name="photo_upload_photo" type="file" />
     </fieldset>
 
     <fieldset id='project_fields'>

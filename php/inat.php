@@ -127,4 +127,8 @@ function add_obs_to_proj($obs_id, $proj_id) {
   return http_post($header,$content,"https://www.inaturalist.org/project_observations");
 }
 
-
+function post_photos($obs_id) {
+// A helper function that posts all uploaded photos
+// to an observation with the given id
+// ~to be implemented
+}
