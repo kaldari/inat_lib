@@ -1,56 +1,61 @@
 <?php
 
-/* File:            obsservation.php
+/* File:            observation.class.php
  * Author:          Kyle Garsuta
  * Created:         8 Jul 2013
  *
  * Description:     
  */
 
-// Include global config
-include_once "config.php";
-include_once "inat.php";
-
 class observation {
 
   public $submitted = FALSE;
-  public $data;
+  public $data = NULL;
 
   public function __construct($id = NULL) {
   // Default constructor
     if($id != NULL) {
     // WITH id, fetch from iNat
-      $this->use_get($id);
+      $this->get_obs($id);
     } else {
     // WITHOUT id, create from form
-      $this->use_form();
+      $this->import_form();
     }
   }
 
   public function print_data() {
   // Print all class variables
-  foreach ($this->data as $key => $value) {
-    echo "<b>$key</b> is $value</br>";
+    foreach ($this->data as $key => $value) {
+      echo "<b>$key</b> is $value</br>";
     }
   }
 
-  private function use_get($id) {
+  private function get_obs($id) {
   // Helper method to construct observation
   // GETs an observation with the input id from inaturalist.org
   // PRE: Valid obs id
   // POST: Obs data stored in class variables
-    $this->data = json_decode( get_content("http://www.inaturalist.org/observations/$id.json") );
+    $this->data = json_decode( 
+      $this->http_get("http://www.inaturalist.org/observations/$id.json"), true );
   }
 
-  private function use_form() {
+  private function import_form() {
   // Helper method to construct observation
   // Constructs an observation using data from $_POST
     echo 'no id - need to implement';
   }
-}
 
-$obs = new observation(333);
-$obs->print_data();
+  private function http_get($url){
+  // A helper function that GETs the input url
+  // POST: Returns server response
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+  }
+}
 
 
 

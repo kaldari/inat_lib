@@ -132,14 +132,3 @@ function post_photos($obs_id) {
 // to an observation with the given id
 // ~to be implemented
 }
-
-function get_content($url){
-// A helper function that GETs the input url
-// POST: Returns server response
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_URL, $url);
-  $data = curl_exec($ch);
-  curl_close($ch);
-  return $data;
-}
