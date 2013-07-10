@@ -36,7 +36,8 @@ class project_observations_list {
       echo '<td>' . $this->obs_list[$i]['created_at'] . '</td>';
       echo '<td>' . $this->obs_list[$i]['observed_on'] . '</td>';
       echo '<td>' . $this->obs_list[$i]['user_login'] . '</td>';
-      echo '<td>' . $this->obs_list[$i]['species_guess'] . '</td>';
+      echo '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "overlay(' . 
+        $this->obs_list[$i]['id'] . ')">' . $this->obs_list[$i]['species_guess'] . '</a></td>';
       echo '</tr>';
     }
     echo '</table>';
