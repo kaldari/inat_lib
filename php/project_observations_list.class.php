@@ -2,9 +2,7 @@
 
 /* File:            project_observations_list.class.php
  * Author:          Kyle Garsuta
- * Created:         9 Jul 2013
- *
- * Description:     
+ * Created:         9 Jul 2013 
  */
 
 include_once "config.php";
@@ -12,33 +10,35 @@ include_once "observation.class.php";
 
 class project_observations_list {
 
-  public $obs_id_list = array();
+  // List of obs ids
+  public $obs_list = array();
 
   public function __construct($uid = NULL) {
   // Default constructor
-    if($uid == NULL) {
-      $this->get_list("iseahorse");
-    }
+  // POST:  WITH uid, get user obs
+  //        WITOUT uid, get all proj obs
+    $this->get_list($uid);
   }
 
-  public function print_all($choices) {
-  // Print all observations in a table
-  // Param: $choices is an array containing the name of fields
-  //  you would like to display
+  public function print_proj_obs() {
+  // Print observations in a table
+    
+    // Print headers
+    echo "<table>";   
+    echo '<th>' . "Posted" . '</th>';
+    echo '<th>' . "Date observed" . '</th>';
+    echo '<th>' . "User" . '</th>';
+    echo '<th>' . "Species" . '</th>'; 
 
-    echo '<table id="observations_list">';
-    for($k=0; $k < count($choices); $k++) {
-      echo '<th id=' . $choices[$k] . '>' . $choices[$k] . '</th>';
-    }
+    for($i=0; $i < count($this->obs_list); $i++) {
 
-    for($i=0; $i < count($this->obs_id_list); $i++) {
-      $obs = new observation($this->obs_id_list[$i]);
       echo '<tr>';
-      for($j=0; $j < count($choices); $j++) {
-        echo '<td>' . $obs->data[$choices[$j]] . '</td>';
-      }
+      echo '<td>' . $this->obs_list[$i]['created_at'] . '</td>';
+      echo '<td>' . $this->obs_list[$i]['observed_on'] . '</td>';
+      echo '<td>' . $this->obs_list[$i]['user_login'] . '</td>';
+      echo '<td>' . $this->obs_list[$i]['species_guess'] . '</td>';
       echo '</tr>';
-  }
+    }
     echo '</table>';
   }
 
@@ -53,15 +53,22 @@ class project_observations_list {
     return $data;
   }
   
-  private function get_list($project){
-  // A helper function that GETs the ids of all obs in the project
-  // PRE: Valid project id
-  // POST: Observation list json stored in $this->obs_id_list
+  private function get_list($uid = NULL){
+  // A helper function that GETs the ids of observations in the project
+  // PRE: Valid user id or blank id
+  // POST:  WITHOUT uid, GET all project obs
+  //        WITH uid, GET user obs
 
-    $data = $this->http_get("http://www.inaturalist.org/observations/project/$project.json");
-    $data = json_decode($data, true);
-    for($i=0; $i < count($data); $i++) {
-      $this->obs_id_list[$i] = $data[$i]['id'];
+    global $project;
+    
+    if($uid == NULL) {
+      $data = $this->http_get("http://www.inaturalist.org/observations/project/$project.json");
+    } else {
+      $data = $this->http_get("http://www.inaturalist.org/observations/$uid.json");
     }
+    $data = json_decode($data, true);
+    $this->obs_list = $data;
   }
+
 }
+

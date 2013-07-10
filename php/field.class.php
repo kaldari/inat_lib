@@ -3,8 +3,6 @@
 /* File:            field.class.php
  * Author:          Kyle Garsuta
  * Created:         9 Jul 2013
- *
- * Description:     
  */
 
 class field {

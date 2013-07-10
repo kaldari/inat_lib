@@ -3,13 +3,13 @@
 /* File:            observation.class.php
  * Author:          Kyle Garsuta
  * Created:         8 Jul 2013
- *
- * Description:     
+ * 
+ * Description      This file defines the observation class
  */
 
 class observation {
 
-  public $submitted = FALSE;
+  private $saved = FALSE;
   public $data = NULL;
 
   public function __construct($id = NULL) {

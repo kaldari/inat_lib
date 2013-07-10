@@ -15,9 +15,8 @@
   <?php
     include_once 'php/project_observations_list.class.php';
 
-    $obs_list = new project_observations_list();
-    $choices = array("created_at", "observed_on", "user_login", "species_guess");
-    $obs_list->print_all($choices);
+    $obs_list = new project_observations_list("juancruzado");
+    $obs_list->print_proj_obs();
   ?>
   </center>
   </fieldset>
