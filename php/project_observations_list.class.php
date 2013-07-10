@@ -26,16 +26,21 @@ class project_observations_list {
     // Print headers
     $html = $html . "<table>";   
     $html = $html . '<th>' . "Posted" . '</th>';
-    $html = $html . '<th>' . "Date observed" . '</th>';
     $html = $html . '<th>' . "User" . '</th>';
     $html = $html . '<th>' . "Species" . '</th>'; 
 
     for($i=0; $i < count($this->obs_list); $i++) {
 
       $html = $html . '<tr>';
+
+      // Date posted column
       $html = $html . '<td>' . $this->obs_list[$i]['created_at'] . '</td>';
-      $html = $html . '<td>' . $this->obs_list[$i]['observed_on'] . '</td>';
-      $html = $html . '<td>' . $this->obs_list[$i]['user_login'] . '</td>';
+
+      // User column
+      $html = $html . '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "view_user(' . 
+        $this->obs_list[$i]['user_id'] . ')">' . $this->obs_list[$i]['user_login'] . '</a></td>';
+
+      // Species column
       $html = $html . '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "view_obs(' . 
         $this->obs_list[$i]['id'] . ')">' . $this->obs_list[$i]['species_guess'] . '</a></td>';
       $html = $html . '</tr>';

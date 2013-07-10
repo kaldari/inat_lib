@@ -1,13 +1,13 @@
 <?php
 
-/* File:            observation.class.php
+/* File:            user.class.php
  * Author:          Kyle Garsuta
- * Created:         8 Jul 2013
+ * Created:         10 Jul 2013
  * 
- * Description      This file defines the observation class
+ * Description      This file defines the user class
  */
 
-class observation {
+class user {
 
   public $data = NULL;
 
@@ -15,7 +15,7 @@ class observation {
   // Default constructor
     if($id != NULL) {
     // WITH id, fetch from iNat
-      $this->get_obs($id);
+      $this->get_user($id);
     } else {
     // WITHOUT id, create from form
       $this->import_form();
@@ -23,7 +23,7 @@ class observation {
   }
 
   public function html() {
-  // Returns obs data in html format
+  // Returns user data in html format
     $html = '';
     foreach ($this->data as $key => $value) {
       $html = $html . "<b>$key</b> is $value</br>";
@@ -31,18 +31,18 @@ class observation {
     return $html;
   }
 
-  private function get_obs($id) {
-  // Constructor helper to construct observation
-  // GETs an observation with the input id from inaturalist.org
-  // PRE: Valid obs id
-  // POST: Obs data stored in class variables
+  private function get_user($id) {
+  // Constructor helper to construct a user
+  // GETs a user with the input id from inaturalist.org
+  // PRE: Valid user id
+  // POST: User data stored in class variables
     $this->data = json_decode( 
-      $this->http_get("http://www.inaturalist.org/observations/$id.json"), true );
+      $this->http_get("http://www.inaturalist.org/people/$id.json"), true );
   }
 
   private function import_form() {
-  // Constructor helper to construct observation
-  // Constructs an observation using data from $_POST
+  // Constructor helper to construct a user
+  // Constructs a user using data from $_POST
     echo 'no id - need to implement';
   }
 
@@ -56,5 +56,5 @@ class observation {
     curl_close($ch);
     return $data;
   }
-
 }
+

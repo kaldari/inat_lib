@@ -9,11 +9,10 @@
     z-index:10000;
 
     /* styling */
-    background-color:#333;
-
-    width:675px;
-    min-height:200px;
-    border:1px solid #666;
+    background-color:#ffffff;
+    width:620px;
+    border:1px solid #dddddd;
+    border-radius: 5px;
 
     /* CSS3 styling for latest browsers */
     -moz-box-shadow:0 0 90px 5px #000;

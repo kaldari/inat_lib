@@ -3,53 +3,22 @@
 <head>
   <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/overlay/standalone.css"/>
-  <link rel="stylesheet" type="text/css" href="css/overlay/overlay-basic.css"/>
-
-  <style>
-    /* some styling for triggers */
-    #triggers {
-    text-align:center;
-    }
-
-    #triggers img {
-    cursor:pointer;
-    margin:0 5px;
-    background-color:#fff;
-    border:1px solid #ccc;
-    padding:2px;
-
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-
-    }
-
-    /* styling for elements inside overlay */
-    .details {
-    position:absolute;
-    top:15px;
-    right:15px;
-    font-size:11px;
-    color:#fff;
-    width:150px;
-    }
-
-    .details h3 {
-    color:#aba;
-    font-size:15px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/overlay/overlay_basic.css"/>
+  <link rel="stylesheet" type="text/css" href="css/overlay/all_obs.css"/>
   <script>
     // Calls the php code to display obs details
     function view_obs(obs_id) {
       $("#details").load('php/view_obs.php' + '/?obs_id=' + obs_id);
     }
-  </script>
 
+    function view_user(user_id) {
+      $("#details").load('php/view_user.php' + '/?user_id=' + user_id);
+    }
+  </script>
 </head>
 
 <body>
-
-  <div id="triggers">
+  <div>
     <p><center>
       <?php
       include_once 'php/project_observations_list.class.php';
@@ -64,16 +33,18 @@
 
   <!-- overlay -->
   <div class="simple_overlay" id="mies1">
-    <img src="http://farm4.static.flickr.com/3651/3445879840_7ca4b491e9.jpg" />
+    <img id="photos" class="photos" src="http://farm8.staticflickr.com/7072/7161280137_35991cb2b7_b.jpg" />
     <div id="details" class="details"></div>
   </div>
 
   <script>
     // Trigers the overlay on user click
     $(document).ready(function() {
-        $("a[rel]").overlay();
+        $("a[rel]").overlay({
+	        top: 25,
+          absolute: false,
+        });
       });
   </script>
-
 </body>
 </html>
