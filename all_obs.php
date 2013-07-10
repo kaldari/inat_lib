@@ -41,7 +41,7 @@
   </style>
   <script>
     function overlay(obs_id) {
-      $("#details").html("<strong>" + obs_id + "</strong>");
+      $("#details").html("<strong>" + obs_id + "<? echo 'test'; ?>" + "</strong>");
     }
   </script>
 
