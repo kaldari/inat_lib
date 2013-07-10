@@ -32,7 +32,7 @@
   </div>
 
   <!-- overlay -->
-  <div class="simple_overlay" id="mies1">
+  <div class="simple_overlay" id="mies1" >
     <img id="photos" class="photos" src="http://farm8.staticflickr.com/7072/7161280137_35991cb2b7_b.jpg" />
     <div id="details" class="details"></div>
   </div>
