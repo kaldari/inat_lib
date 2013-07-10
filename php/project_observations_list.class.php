@@ -20,27 +20,28 @@ class project_observations_list {
     $this->get_list($uid);
   }
 
-  public function print_proj_obs() {
-  // Print observations in a table
+  public function html_table() {
+  // POST: Returns obs list in html table format
     
     // Print headers
-    echo "<table>";   
-    echo '<th>' . "Posted" . '</th>';
-    echo '<th>' . "Date observed" . '</th>';
-    echo '<th>' . "User" . '</th>';
-    echo '<th>' . "Species" . '</th>'; 
+    $html = $html . "<table>";   
+    $html = $html . '<th>' . "Posted" . '</th>';
+    $html = $html . '<th>' . "Date observed" . '</th>';
+    $html = $html . '<th>' . "User" . '</th>';
+    $html = $html . '<th>' . "Species" . '</th>'; 
 
     for($i=0; $i < count($this->obs_list); $i++) {
 
-      echo '<tr>';
-      echo '<td>' . $this->obs_list[$i]['created_at'] . '</td>';
-      echo '<td>' . $this->obs_list[$i]['observed_on'] . '</td>';
-      echo '<td>' . $this->obs_list[$i]['user_login'] . '</td>';
-      echo '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "overlay(' . 
+      $html = $html . '<tr>';
+      $html = $html . '<td>' . $this->obs_list[$i]['created_at'] . '</td>';
+      $html = $html . '<td>' . $this->obs_list[$i]['observed_on'] . '</td>';
+      $html = $html . '<td>' . $this->obs_list[$i]['user_login'] . '</td>';
+      $html = $html . '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "view_obs(' . 
         $this->obs_list[$i]['id'] . ')">' . $this->obs_list[$i]['species_guess'] . '</a></td>';
-      echo '</tr>';
+      $html = $html . '</tr>';
     }
-    echo '</table>';
+    $html = $html . '</table>';
+    return $html;
   }
 
   private function http_get($url){

@@ -9,7 +9,6 @@
 
 class observation {
 
-  private $saved = FALSE;
   public $data = NULL;
 
   public function __construct($id = NULL) {
@@ -23,15 +22,17 @@ class observation {
     }
   }
 
-  public function print_data() {
-  // Print all class variables
+  public function html() {
+  // Returns obs data in html format
+    $html = '';
     foreach ($this->data as $key => $value) {
-      echo "<b>$key</b> is $value</br>";
+      $html = $html . "<b>$key</b> is $value</br>";
     }
+    return $html;
   }
 
   private function get_obs($id) {
-  // Helper method to construct observation
+  // Constructor helper to construct observation
   // GETs an observation with the input id from inaturalist.org
   // PRE: Valid obs id
   // POST: Obs data stored in class variables
@@ -40,7 +41,7 @@ class observation {
   }
 
   private function import_form() {
-  // Helper method to construct observation
+  // Constructor helper to construct observation
   // Constructs an observation using data from $_POST
     echo 'no id - need to implement';
   }
@@ -56,16 +57,3 @@ class observation {
     return $data;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

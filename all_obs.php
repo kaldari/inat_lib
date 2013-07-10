@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,20 +39,25 @@
     }
   </style>
   <script>
-    function overlay(obs_id) {
-      $("#details").html("<strong>" + obs_id + "<? echo 'test'; ?>" + "</strong>");
+    // Calls the php code to display obs details
+    function view_obs(obs_id) {
+      $("#details").load('php/view_obs.php' + '/?obs_id=' + obs_id);
     }
   </script>
 
 </head>
 
 <body>
+
   <div id="triggers">
     <p><center>
       <?php
       include_once 'php/project_observations_list.class.php';
+      // Create new project obs object
       $obs_list = new project_observations_list();
-      $obs_list->print_proj_obs();
+
+      // Print project obs list table html
+      echo $obs_list->html_table();
       ?>
     </p></center>
   </div>
@@ -61,15 +65,15 @@
   <!-- overlay -->
   <div class="simple_overlay" id="mies1">
     <img src="http://farm4.static.flickr.com/3651/3445879840_7ca4b491e9.jpg" />
-    <div id="details" class="details">
-
-    </div>
+    <div id="details" class="details"></div>
   </div>
 
   <script>
+    // Trigers the overlay on user click
     $(document).ready(function() {
         $("a[rel]").overlay();
       });
   </script>
+
 </body>
 </html>
