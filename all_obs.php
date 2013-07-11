@@ -8,15 +8,15 @@
   <script>
     // Calls the php code to display obs details
     function view_obs(obs_id) {
-      $("#details").load('php/view_obs.php' + '/?obs_id=' + obs_id);
+      $("#details").load('php/display/view_observation.php/?id=' + obs_id);
     }
 
     function view_user(user_id) {
-      $("#details").load('php/view_user.php' + '/?user_id=' + user_id);
+      $("#details").load('php/display/view_user.php/?id=' + user_id);
     }
     
     function view_species(species_id) {
-      $("#details").load('php/view_species.php' + '/?species_id=' + species_id);
+      $("#details").load('php/display/view_species.php/?id=' + species_id);
     }
   </script>
 </head>
@@ -25,7 +25,10 @@
   <div id = 'body'>
     <p><center>
       <?php
-      include_once 'php/view_obs_list.php';
+      include_once dirname(__FILE__) . '/php/controller/observation_list_controller.class.php';
+
+      $controller = new observationListController('project', 'iseahorse');
+      $controller->display();
       ?>
     </p></center>
   </div>

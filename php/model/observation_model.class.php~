@@ -13,7 +13,7 @@ class observationModel {
 
   public function __construct($id = NULL) {
   // Default constructor
-    if($id != NULL) {
+    if($id != NULL) {echo 'test';
     // WITH id, fetch from iNat
       $this->get_obs($id);
     } else {

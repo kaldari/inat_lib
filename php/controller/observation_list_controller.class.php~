@@ -1,18 +1,30 @@
 <?php
 
-/* File:            observation_list_view.class.php
+/* File:            species_controller.class.php
  * Author:          Kyle Garsuta
- * Created:         11 Jul 2013
+ * Created:         12 Jul 2013
  * 
- * Description      Displays the project observations list
+ * Description      This file defines the species controller
  */
 
-include_once '../model/observation_list.class.php';
+include_once dirname(__FILE__) . '/../model/observation_list_model.class.php';
+include_once dirname(__FILE__) . '/../view/observation_list_view.class.php';
 
-// Create new project obs object
-$obs_list = new observation_list('project', 'iseahorse');
+class observationListController {
 
-// Print project obs list table html
-echo $obs_list->html_table();
-      
-?>
+  private $model;
+  private $view;
+
+  public function __construct($type, $id) {
+  // Default constructor - creates new model and view
+
+    $this->model = new observationListModel($type, $id);
+    $this->view = new observationListView($this->model->data());
+  }
+  
+  public function display() {
+  // Calls view to display configured view
+    echo $this->view->html();
+  }
+}
+

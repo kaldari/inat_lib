@@ -22,6 +22,7 @@ class speciesView {
     foreach ($this->data as $key => $value) {
       $html = $html . "<b>$key</b> is $value</br>";
     }
-    echo $html;
+    return $html;
   }
 }
+

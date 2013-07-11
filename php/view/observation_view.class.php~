@@ -2,17 +2,27 @@
 
 /* File:            observation_view.class.php
  * Author:          Kyle Garsuta
- * Created:         10 Jul 2013
+ * Created:         12 Jul 2013
  * 
- * Description      Displays the observation with the input id
+ * Description      This file defines the species controller
  */
 
-include_once '../class/observation.class.php';
+class observationView {
+  
+  private $data = array();
+  
+  public function __construct($data) {
+    $this->data = $data;
+  }
+  
+  public function html() {
+  // Displays data in html format
+  
+    $html = '';
+    foreach ($this->data as $key => $value) {
+      $html = $html . "<b>$key</b> is $value</br>";
+    }
+    return $html;
+  }
+}
 
-// Get obs id from query string
-$obs_id = $_GET["obs_id"];
-
-$obs = new observation($obs_id);
-echo $obs->html();
-
-?>

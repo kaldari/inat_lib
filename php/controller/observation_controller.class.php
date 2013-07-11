@@ -1,18 +1,30 @@
 <?php
 
-/* File:            observation_view.class.php
+/* File:            species_controller.class.php
  * Author:          Kyle Garsuta
- * Created:         10 Jul 2013
+ * Created:         12 Jul 2013
  * 
- * Description      Displays the observation with the input id
+ * Description      This file defines the species controller
  */
 
-include_once '../class/observation_model.class.php';
+include_once dirname(__FILE__) . '/../model/observation_model.class.php';
+include_once dirname(__FILE__) . '/../view/observation_view.class.php';
 
-// Get obs id from query string
-$obs_id = $_GET["obs_id"];
+class observationController {
 
-$obs = new observation($obs_id);
-echo $obs->html();
+  private $model;
+  private $view;
 
-?>
+  public function __construct($id) {
+  // Default constructor - creates new model and view
+
+    $this->model = new observationModel($id);
+    $this->view = new observationView($this->model->data());
+  }
+  
+  public function display() {
+  // Calls view to display configured view
+    echo $this->view->html();
+  }
+}
+

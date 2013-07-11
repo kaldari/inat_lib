@@ -5,12 +5,12 @@
  * Created:         9 Jul 2013 
  */
 
-include_once "observation.class.php";
+include_once dirname(__FILE__) . '/observation_model.class.php';
 
-class observation_list {
+class observationListModel {
 
   // List of obs ids
-  public $obs_list = array();
+  public $data = array();
 
   public function __construct($type, $id) {
   // Default constructor
@@ -23,42 +23,12 @@ class observation_list {
       $data = $this->http_get("http://www.inaturalist.org/observations/$id.json");
     }
     $data = json_decode($data, true);
-    $this->obs_list = $data;
+    $this->data = $data;
   }
-
-  public function html_table() {
-  // POST: Returns obs list in html table format
-    
-    // Print headers
-    $html = $html . "<table>";   
-    $html = $html . '<th>' . "Posted" . '</th>';
-    $html = $html . '<th>' . "User" . '</th>';
-    $html = $html . '<th>' . "Species" . '</th>'; 
-    $html = $html . '<th>' . "Profile" . '</th>'; 
-
-    for($i=0; $i < count($this->obs_list); $i++) {
-
-      $html = $html . '<tr>';
-
-      // Date posted column
-      $html = $html . '<td>' . $this->obs_list[$i]['created_at'] . '</td>';
-
-      // User column
-      $html = $html . '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "view_user(' . 
-        $this->obs_list[$i]['user_id'] . ')">' . $this->obs_list[$i]['user_login'] . '</a></td>';
-
-      // Obs column
-      $html = $html . '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "view_obs(' . 
-        $this->obs_list[$i]['id'] . ')">' . $this->obs_list[$i]['species_guess'] . '</a></td>';
-        
-      // Species column
-      $html = $html . '<td>' . '<a rel = "#mies1" href=""' . 'onClick = "view_species(' . 
-        $this->obs_list[$i]['taxon_id'] . ')">' . $this->obs_list[$i]['taxon_id'] . '</a></td>';
-        
-      $html = $html . '</tr>';
-    }
-    $html = $html . '</table>';
-    return $html;
+  
+  public function data() {
+  // Returns data
+    return $this->data;
   }
 
   private function http_get($url){

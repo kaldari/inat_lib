@@ -9,7 +9,7 @@
 
 class speciesModel {
 
-  public $data = NULL;
+  private $data = NULL;
 
   public function __construct($id) {
   // Default constructor
@@ -41,4 +41,3 @@ class speciesModel {
     return $data;
   }
 }
-

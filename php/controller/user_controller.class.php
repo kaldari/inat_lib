@@ -1,18 +1,29 @@
 <?php
 
-/* File:            user_view.class.php
+/* File:            user_controller.class.php
  * Author:          Kyle Garsuta
- * Created:         10 Jul 2013
+ * Created:         12 Jul 2013
  * 
- * Description      Displays a user with the input id
+ * Description      This file defines the user controller
  */
 
-include_once '../model/user_model.class.php';
+include_once dirname(__FILE__) . '/../model/user_model.class.php';
+include_once dirname(__FILE__) . '/../view/user_view.class.php';
 
-// Get obs id from query string
-$user_id = $_GET["user_id"];
+class userController {
 
-$user = new user($user_id);
-echo $user->html();
+  private $model;
+  private $view;
 
-?>
+  public function __construct($id) {
+  // Default constructor - creates new model and view
+    $this->model = new userModel($id);
+    $this->view = new userView($this->model->data());
+  }
+  
+  public function display() {
+  // Calls view to display configured view
+    echo $this->view->html();
+  }
+}
+

@@ -12,13 +12,13 @@ include_once dirname(__FILE__) . '/../view/species_view.class.php';
 
 class speciesController {
 
-  private $species;
+  private $model;
   private $view;
 
   public function __construct($id) {
   // Default constructor - creates new model and view
-    $this->species = new speciesModel($id);
-    $this->view = new speciesView($this->species->data());
+    $this->model = new speciesModel($id);
+    $this->view = new speciesView($this->model->data());
   }
   
   public function display() {
@@ -26,3 +26,4 @@ class speciesController {
     echo $this->view->html();
   }
 }
+

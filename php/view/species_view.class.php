@@ -16,7 +16,7 @@ class speciesView {
   }
   
   public function html() {
-  // Displays species data in html format
+  // Displays data in html format
   
     $html = '';
     foreach ($this->data as $key => $value) {
@@ -25,3 +25,4 @@ class speciesView {
     return $html;
   }
 }
+
