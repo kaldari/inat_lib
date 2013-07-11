@@ -24,9 +24,9 @@
 <body>
   <div id = 'body'>
     <p><center>
-      <?php
-      include_once 'php/view_obs_list.php';
-      ?>
+      <script>
+        $('#body').load('php/view_obs_list.php');
+      </script>
     </p></center>
   </div>
 

@@ -1,0 +1,18 @@
+<?php
+
+/* File:            view_species.php
+ * Author:          Kyle Garsuta
+ * Created:         11 Jul 2013
+ * 
+ * Description      Displays a species with the input id
+ */
+
+include_once 'class/species.class.php';
+
+// Get obs id from query string
+$species_id = $_GET["species_id"];
+
+$species = new species($species_id);
+echo $species->html();
+
+?>

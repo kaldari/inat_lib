@@ -1,0 +1,27 @@
+<?php
+
+/* File:            species_controller.class.php
+ * Author:          Kyle Garsuta
+ * Created:         12 Jul 2013
+ * 
+ * Description      This file defines the species controller
+ */
+
+class speciesView {
+  
+  private $data = array();
+  
+  public function __construct($data) {
+    $this->data = $data;
+  }
+  
+  public function html() {
+  // Displays species data in html format
+  
+    $html = '';
+    foreach ($this->data as $key => $value) {
+      $html = $html . "<b>$key</b> is $value</br>";
+    }
+    return $html;
+  }
+}

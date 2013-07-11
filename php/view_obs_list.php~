@@ -1,0 +1,18 @@
+<?php
+
+/* File:            view_obs_list.php
+ * Author:          Kyle Garsuta
+ * Created:         11 Jul 2013
+ * 
+ * Description      Displays the project observations list
+ */
+
+include_once 'class/observation_list.class.php';
+
+// Create new project obs object
+$obs_list = new observation_list('project', 'iseahorse');
+
+// Print project obs list table html
+echo $obs_list->html_table();
+      
+?>

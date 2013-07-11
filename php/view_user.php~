@@ -7,7 +7,7 @@
  * Description      Displays a user with the input id
  */
 
-include_once 'user.class.php';
+include_once 'class/user.class.php';
 
 // Get obs id from query string
 $user_id = $_GET["user_id"];
