@@ -9,6 +9,8 @@
  * Description:     
  *  This program submits registers a user account based on the information
  *  provided by the user.
+ *  This file was initially used as proof of concept and needs
+ *  re-implementation and cleaning up; nevertheless functional for now
  */
 
 include_once "config.php";

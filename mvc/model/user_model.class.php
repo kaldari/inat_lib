@@ -11,16 +11,11 @@ class userModel {
 
   public $data = NULL;
 
-  public function __construct($id = NULL) {
+  public function __construct($id) {
   // Default constructor
   
-    if($id != NULL) {
     // WITH id, fetch from iNat
       $this->get_user($id);
-    } else {
-    // WITHOUT id, create from form
-      $this->import_form();
-    }
   }
   
   public function data() {
@@ -35,12 +30,6 @@ class userModel {
   // POST: User data stored in class variables
     $this->data = json_decode( 
       $this->http_get("http://www.inaturalist.org/people/$id.json"), true );
-  }
-
-  private function import_form() {
-  // Constructor helper to construct a user
-  // Constructs a user using data from $_POST
-    echo 'no id - need to implement';
   }
 
   private function http_get($url){
