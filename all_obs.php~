@@ -5,6 +5,38 @@
   <link rel="stylesheet" type="text/css" href="css/overlay/standalone.css"/>
   <link rel="stylesheet" type="text/css" href="css/overlay/overlay_basic.css"/>
   <link rel="stylesheet" type="text/css" href="css/overlay/all_obs.css"/>
+  <style>
+  /* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   speak for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+  </style>
   <script>
     // Calls the php code to display obs details
     function view_obs(obs_id) {
@@ -18,6 +50,14 @@
     function view_species(species_id) {
       $("#details").load('mvc/action/show_species.php/?id=' + species_id);
     }
+    $("body").on({
+    ajaxStart: function() { 
+        $(this).addClass("loading"); 
+    },
+    ajaxStop: function() { 
+        $(this).removeClass("loading"); 
+    }    
+});
   </script>
 </head>
 
@@ -25,7 +65,7 @@
   <div id = 'body'>
     <p><center>
       <?php
-      include_once dirname(__FILE__) . '/php/controller/observation_list_controller.class.php';
+      include_once dirname(__FILE__) . '/mvc/controller/observation_list_controller.class.php';
 
       $controller = new observationListController('project', 'iseahorse');
       $controller->display();
