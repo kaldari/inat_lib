@@ -4,7 +4,7 @@
  * Author:          Kyle Garsuta
  * Created:         12 Jul 2013
  * 
- * Description      This file defines the species controller
+ * Description      This file defines the observation list view
  */
 
 class observationListView {
@@ -12,11 +12,15 @@ class observationListView {
   private $data = array();
   
   public function __construct($data) {
+  // Default constructor
+  // Param: $data is an array containing observation list data from inaturalist.
+  //        See model for details.  
+  
     $this->data = $data;
   }
   
   public function html() {
-  // Displays data in html format
+  // Returns data in html format
   
     // Print headers
     $html = $html . "<table>";   

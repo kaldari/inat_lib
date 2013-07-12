@@ -14,7 +14,7 @@ class userView {
   public function __construct($data) {
   // Default constructor
   // Param: $data is an array containing user data from inaturalist. See
-  //        user model for details.
+  //        model for details.
   
     $this->data = $data;
   }
