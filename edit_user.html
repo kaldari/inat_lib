@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>iNaturalist | Registration</title>
+  <meta name="description" content="iNaturalist registration">
+  <meta name="keywords" content="HTML,CSS,JavaScript">
+  <meta name="author" content="Kyle Garsuta">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/inat.css">
+  <script src="js/jquery/jquery-1.10.1.min.js"></script>
+  <script src="js/jquery/plugins/jquery-validate/jquery.validate.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#form").validate();
+    });
+  </script>
+</head>
+<body>
+  <form action="mvc/action/register.php" method="post" id="form">
+    <fieldset>
+      <legend>Registration</legend>
+      <p>
+        <label for="login">Login/username</label>
+        <input type="text" name="login"size="30" pattern=".{3,40}" class="required" />
+        <!--Allowed values: Must be within 3 and 40 characters and must not begin with a number.-->
+      </p>
+      <p>
+        <label for="email">Email</label>
+        <input type="text" name="email" size="30" class="required email" />
+        <!--Allowed values: Any valid email address.-->
+      </p>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
+        <!--Allowed values: Minimum 5 characters (this is not inat specified)-->
+      </p>
+      <p>
+        <label for="password_confirmation">Password confirmation</label>
+        <input type="password" equalto="#password" name="password_confirmation" />
+        <!--Allowed values: Value matching id='password'-->
+      </p>
+      <p>
+        <input type="checkbox" name="terms" class="required checkbox" />
+          I agree to the terms and conditions<br>
+          <!--Terms and conditions link need to be added here-->
+      </p>
+      <p>
+        <input type="submit" value="Submit" name="submit" />
+      </p>
+    </fieldset>
+</form>
+</body>
+</html>
