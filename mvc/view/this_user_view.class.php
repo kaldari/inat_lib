@@ -73,7 +73,8 @@ class thisUserView {
   
   public function block() {
   // Returns data in html format
-  
+    if( !$this->user_isLogged_in() ) return;
+    
     return
       "<script src='../../js/jquery/jquery-1.10.1.min.js'></script>
       <script src='../../js/jquery/plugins/jquery-cookie-master/jquery.cookie.js'></script>
@@ -122,6 +123,13 @@ class thisUserView {
       }
     </script>
     </center>";
+  }
+  
+  private function user_isLogged_in() {
+  // Returns true if user is logged in, false otherwise
+  
+  if( isset($_COOKIE['inat_auth']) ) return true;
+  return false;
   }
 }
 

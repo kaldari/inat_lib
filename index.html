@@ -31,8 +31,8 @@
 </head>
 <body onload="index_onload()">
   <div id="form">
-    <fieldset id='current_user' >
-    </fieldset>
+    <div id='current_user' >
+    </div>
     <fieldset>
       <p>
         <input id="all_obs" type="button" onclick="window.location = 'all_obs.php'" value="All observations">
@@ -55,7 +55,7 @@
     </fieldset>
   </div>
   <script>
-  $("#current_user").load("block/this_user/user.block.php");
-</script>
+    $("#current_user").load("block/this_user/user.block.php");
+  </script>
 </body>
 </html>
