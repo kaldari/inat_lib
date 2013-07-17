@@ -30,14 +30,19 @@ class thisUserController {
     echo $this->view->html();
   }
   
-  public function display_editUser() {
-  // Calls view to display configured view
-    echo $this->view->editUser();
-  }
-  
   public function display_block() {
   // Calls view to display configured view
     echo $this->view->block();
+  }
+  
+  public function display_viewUser() {
+  // Calls view to display configured view
+    echo $this->view->viewUser();
+  }
+
+  public function display_editUser() {
+  // Calls view to display configured view
+    echo $this->view->editUser();
   }
 }
 

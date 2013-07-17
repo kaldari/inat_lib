@@ -7,13 +7,13 @@
  * Description      This file defines the this_user view
  */
 
+include_once dirname(__FILE__) . '/../../config.php';
+
 class thisUserView {
   
   private $data;
   private $email;
   private $login;
-  private $password;
-  private $password_confirm;
   private $description;
   private $time_zone;
   
@@ -25,8 +25,6 @@ class thisUserView {
     $this->data = $data;
     $this->email = $data['email'];
     $this->login = $data['login'];
-    $this->password = $data['password'];
-    $this->password_confirm = $data['password_confirm'];
     $this->description = $data['description'];
     $this->time_zone = $data['time_zone'];
   }
@@ -41,59 +39,20 @@ class thisUserView {
     return $html;
   }
   
-  public function editUser() {
-  // Returns data in html format
-  
-    return
-      "<form action='mvc/action/add_obs.php' method='post' id='form' enctype='multipart/form-data'>
-      <fieldset id='stndrd_fields'>
-      
-      <p><img src='" . $this->data['user_icon_url'] . "' ></p>" .
-      "<p>
-        Username: " . $this->data['login'] .
-      "</p>
-      <p>
-        <label for='password'>Password</label>
-        <input type='password' name='password' id='password' pattern='.{5,}' class='required password' />
-      </p>
-      <p>
-        <label for='password_confirmation'>Password confirmation</label>
-        <input type='password' equalto='#password' name='password_confirmation' />
-      </p>" .
-      "<p>
-        <label for='description_stndrd'></label>
-        <textarea name='description_stndrd' cols='50' rows='5' placeholder='Description'></textarea>
-      </p>
-      <p>
-        <input type='submit' />
-      </p>
-      </fieldset>
-      </form>";
-  }
-  
   public function block() {
   // Returns data in html format
     if( !$this->user_isLogged_in() ) return;
     
+    global $lib_rootURL;
+    
     return
-      "<script src='../../js/jquery/jquery-1.10.1.min.js'></script>
-      <script src='../../js/jquery/plugins/jquery-cookie-master/jquery.cookie.js'></script>
-      <script>
-        function logout() {
-        // PRE: User is logged in
-        // POST: User is logged out
-          $.removeCookie('inat_auth', { path: '/' });
-          location.reload();
-        }
-      </script>
-      
-      <center>
+      "<center>
       <div id='this_block'>
-  		<table border='0' cellpadding='0' cellspacing='0' style='width: 200px;'>
+  		<table>
 			<tbody>
 			  <tr>
 			    <td colspan='1' rowspan='3'>
-			      <img src='". $this->data['user_icon_url'] .
+			      <img src='". $this->data['medium_user_icon_url'] .
 			      "' width='100px' height='100px'></img>
 			    </td>
           <td>" .
@@ -102,7 +61,10 @@ class thisUserView {
         </tr>
         <tr>
           <td>
-            View | Edit
+            <a class='boxer button small' 
+            href='" . $lib_rootURL . "block/this_user/viewUser.block.php'>View</a> | 
+            <a class='boxer button small' 
+            href='" . $lib_rootURL . "block/this_user/editUser.block.php'>Edit</a>
           </td>
 				</tr>
 				<tr>
@@ -115,14 +77,28 @@ class thisUserView {
       </tbody>
     </table></body>
     </div>
-    <script>
-      // Displays/hides items as accordingly (e.g. hide login if already logged in)
-      if(typeof $.cookie('inat_auth') != 'undefined') {
-      } else {
-        document.getElementById('this_block').style.display='none';
-      }
-    </script>
+
     </center>";
+  }
+  
+  public function viewUser() {
+  // Returns data in html format
+  
+    $html = '';
+    foreach ($this->data as $key => $value) {
+      $html = $html . "<b>$key</b> is $value</br>";
+    }
+    return $html;
+  }
+  
+  public function editUser() {
+  // Returns data in html format
+  
+    $html = '';
+    foreach ($this->data as $key => $value) {
+      $html = $html . "<b>$key</b> is $value</br>";
+    }
+    return $html;
   }
   
   private function user_isLogged_in() {
