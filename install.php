@@ -9,7 +9,7 @@
 
 // PHP opening tag
 $config_data = '<?php' . "\r\n";
-$settings_file = '.config/settings.php';
+$settings_file = 'config/settings.php';
 
 // Get the url of the inat_lib root directory
 $this_page = basename($_SERVER['REQUEST_URI']);

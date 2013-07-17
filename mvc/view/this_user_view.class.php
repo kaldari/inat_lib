@@ -7,7 +7,7 @@
  * Description      This file defines the this_user view
  */
 
-include_once dirname(__FILE__) . '/../../.config/settings.php';
+include_once dirname(__FILE__) . '/../../config/settings.php';
 
 class thisUserView {
   
