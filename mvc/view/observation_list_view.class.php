@@ -7,7 +7,7 @@
  * Description      This file defines the observation list view
  */
  
-include_once dirname(__FILE__) . '/../../config.php';
+include_once dirname(__FILE__) . '/../../.config/settings.php';
 
 class observationListView {
   
