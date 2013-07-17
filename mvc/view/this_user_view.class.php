@@ -94,11 +94,28 @@ class thisUserView {
   public function editUser() {
   // Returns data in html format
   
-    $html = '';
-    foreach ($this->data as $key => $value) {
-      $html = $html . "<b>$key</b> is $value</br>";
-    }
-    return $html;
+    return
+    '<form>
+      <p>
+        <label for="email">Email</label>
+        <input type="text" name="email" size="30" class="required email" 
+          value="' . $this->email . '"/>
+        <!--Allowed values: Any valid email address.-->
+      </p>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
+        <!--Allowed values: Minimum 5 characters (this is not inat specified)-->
+      </p>
+      <p>
+        <label for="password_confirmation">Password confirmation</label>
+        <input type="password" equalto="#password" name="password_confirmation" />
+        <!--Allowed values: Value matching id="password"-->
+      </p>
+      <p>
+        <input type="submit" value="Submit" name="submit" />
+      </p>
+    </form>';
   }
   
   private function user_isLogged_in() {

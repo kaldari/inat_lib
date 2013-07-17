@@ -62,7 +62,7 @@
   </script>
   <script>
     $(document).ready(function() {
-      $(".boxer").not(".retina, .boxer_fixed, .boxer_top, .object").boxer({
+      $(".boxer").boxer({
         fixed: false,
       });
     });
