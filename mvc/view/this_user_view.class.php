@@ -94,8 +94,11 @@ class thisUserView {
   public function editUser() {
   // Returns data in html format
   
+  global $lib_rootURL;
+  
     return
-    '<form>
+    '<form action="' . $lib_rootURL . 'block/this_user/editUser.action.php" 
+      method="post" id="form">
       <p>
         <label for="email">Email</label>
         <input type="text" name="email" size="30" class="required email" 
@@ -104,7 +107,7 @@ class thisUserView {
       </p>
       <p>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" pattern=".{5,}" class="required password" />
+        <input type="password" name="password" id="password" pattern=".{5,}" class="password" />
         <!--Allowed values: Minimum 5 characters (this is not inat specified)-->
       </p>
       <p>
@@ -113,7 +116,7 @@ class thisUserView {
         <!--Allowed values: Value matching id="password"-->
       </p>
       <p>
-        <input type="submit" value="Submit" name="submit" />
+        <input type="submit" />
       </p>
     </form>';
   }

@@ -22,7 +22,10 @@ class thisUserController {
   }
   
   public function edit_user($data) {
-    $this->model->edit_user($data);
+  // POST: Returns true on success, false otherwise
+  
+    if($this->model->edit_user($data)) return true;
+    return false;
   }
   
   public function display() {

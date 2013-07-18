@@ -1,16 +1,21 @@
 <html>
   <head>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#form").validate();
+      });
+    </script>
   </head>
 	<body>
-	  <div id='block'>
     <?php
-      // Display the user view block
+      // Display the user edit block
       include_once dirname(__FILE__) . 
         '/../../mvc/controller/this_user_controller.class.php';
       $controller = new thisUserController();
       $controller->display_editUser();
     ?>
-    </div>
 	</body>
 </html>
