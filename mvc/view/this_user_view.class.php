@@ -75,7 +75,15 @@ class thisUserView {
         </tr>
       </tbody>
     </table></body>
-    </div>";
+    </div>
+    <script>
+      function logout() {
+      // PRE: User is logged in
+      // POST: User is logged out
+        $.removeCookie('inat_auth', { path: '/' });
+        location.reload();
+      }
+    </script>";
   }
   
   public function viewUser() {
