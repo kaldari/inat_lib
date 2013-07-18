@@ -27,25 +27,13 @@
 <body>
   <div id="form">
     <fieldset id='current_user' >
-      <?php include 'block/this_user/user.block.php' ?>
-    </fieldset>
-    
-    <fieldset>
-      <p>
-        <input id="login" type="button" onclick="window.location = 'login.html'" value="Log in to iNaturalist">
-      </p>      
-      <p>
-        <input id="add_obs" type="button" onclick="window.location = 'add_obs.html'" value="Add an observation">
-      </p>
-      <p>
-        <input id="register" type="button" onclick="window.location = 'register.html'" value="Register">
-      </p>
-      <p>
-        <input id="logout" type="button" onclick="logout()" value="Logout">
-      </p>
+      <?php include 'block/this_userProfile/this_userProfile.block.php' ?>
     </fieldset>
 
     <fieldset>
+      <p>
+        <input id="add_obs" type="button" onclick="window.location = 'add_obs.html'" value="Add an observation">
+      </p>
       <p>
       <?php include 'block/all_obs/all_obs.block.php'; ?>
       </p>
@@ -66,18 +54,6 @@
         fixed: false,
       });
     });
-  </script>
-  <script>
-    // Displays/hides items as accordingly (e.g. hide login if already logged in)
-    if(typeof $.cookie('inat_auth') != 'undefined') {
-      document.getElementById("login").style.display="none";
-      document.getElementById("register").style.display="none";
-       
-    } else {
-      document.getElementById("add_obs").style.display="none";
-      document.getElementById("logout").style.display="none";
-      document.getElementById("edit_user").style.display="none";
-    }
   </script>
 </body>
 </html>

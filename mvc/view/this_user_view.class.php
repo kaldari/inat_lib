@@ -46,8 +46,7 @@ class thisUserView {
     global $lib_rootURL;
     
     return
-      "<center>
-      <div id='this_block'>
+      "<div id='this_block'>
   		<table>
 			<tbody>
 			  <tr>
@@ -76,9 +75,7 @@ class thisUserView {
         </tr>
       </tbody>
     </table></body>
-    </div>
-
-    </center>";
+    </div>";
   }
   
   public function viewUser() {
