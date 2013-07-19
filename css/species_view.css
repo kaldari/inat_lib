@@ -1,0 +1,15 @@
+#species_photos {
+  width: 65%;
+}
+
+#species_summary {
+  width: 30%;
+}
+
+#view_species {
+  width: 950px;
+}
+
+#species_desc {
+  float: left;
+}

@@ -43,19 +43,19 @@ class observationListView {
       // User column
       $html = $html . '<td><a class="boxer button small" 
         href="' . $lib_rootURL . 'block/view_user/view_user.php?id=' .  
-        $this->data[$i]['user_login'] . '"data-width="950">' . 
+        $this->data[$i]['user_login'] . '"data-width="975">' . 
         $this->data[$i]['user_login'] . '</a></td>';
 
       // Obs column
       $html = $html . '<td><a class="boxer button small" 
         href="' . $lib_rootURL . 'block/view_observation/view_observation.php?id=' . 
-        $this->data[$i]['id'] . '"data-width="950">' . 
+        $this->data[$i]['id'] . '"data-width="975">' . 
         $this->data[$i]['species_guess'] . '</a></td>';
         
       // Species column
       $html = $html . '<td><a class="boxer button small" 
         href="' . $lib_rootURL . 'block/view_species/view_species.php?id=' . 
-        $this->data[$i]['taxon_id'] . '"data-width="950">' .
+        $this->data[$i]['taxon_id'] . '"data-width="975">' .
         $this->data[$i]['taxon_id'] . '</a></td>';
         
       $html = $html . '</tr>';

@@ -61,8 +61,9 @@ class thisUserView {
         <tr>
           <td>
             <a class='boxer button small' 
-            href='" . $lib_rootURL . "block/this_user/viewUser.block.php'
-              data-width='950' >View</a> | 
+            href='" . $lib_rootURL . "block/view_user/view_user.php?id=" .  
+            $this->data["login"] . "'data-width='950'>" . 
+            "View</a> | 
             <a class='boxer button small' 
             href='" . $lib_rootURL . "block/this_user/editUser.block.php'
               data-width='500' data-height='300' >Edit</a>
@@ -86,64 +87,6 @@ class thisUserView {
         location.reload();
       }
     </script>";
-  }
-  
-  public function viewUser() {
-  // Returns data in html format
-  
-    global $lib_rootURL;
-    
-    /*
-    $html = '';
-    foreach ($this->data as $key => $value) {
-      echo "<b>$key</b> is $value</br>";
-    }
-    */
-    
-    return '
-    
-		  <table width="100%">
-				  <tr>
-					  <td rowspan="2" width="48">
-						  <img src="' . $this->data["user_icon_url"] . '" width="48"
-						    height="48" border="1">
-						</td>
-					  <td>' .
-						  '<b>' . $this->data["login"] . '</b>' . ' (' . $this->data["email"] . ')' .
-						'</td>
-				  </tr>
-				  <tr>
-					  <td>
-						  Home | Observations | Calendar | Lists | Journal | ' . 
-						    'Identifications | Projects | Profile
-						</td>
-				  </tr>
-		  </table>
-		
-      <table width="100%">
-        <tr>
-        
-          <td width="75%">' .
-            $this->data["description"] . '<br>' .
-          '</td>
-          
-          <td width="25%">
-            <img src="' . $this->data["original_user_icon_url"] . '" 
-              width="250" border="1" ><br>
-            <p>' .
-              'Member since ' . substr( ($this->data["created_at"]),0,-15 ) . '<br><br>' .
-              $this->data["observations_count"] . ' Observation(s)<br>' .
-              $this->data["life_list_taxa_count"] . ' Species<br><br>
-              
-              <a class="boxer button small" href="' . $lib_rootURL . 
-                'block/this_user/editUser.block.php" data-width="500" 
-                data-height="300" >Edit account</a>
-            </p>
-          </td>
-          
-        </tr>
-      </table>
-    ';
   }
   
   public function editUser() {

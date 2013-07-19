@@ -1,0 +1,44 @@
+
+/* 2 columns grid */
+
+.page-container {
+  width: 100%;
+  margin: auto;
+}
+
+.container {
+  margin: 25px;
+  border: 25px;
+}
+
+.column-left {
+  width:50%; 
+  float:left; 
+  position:relative; 
+  margin: auto;
+}
+
+.column-right {
+  width: 50%;
+  padding:0px;
+  margin: auto;
+  float: right;
+}
+
+/* User pictures */
+
+.userPic_thumb {
+  width: 48px;
+  height: 48px;
+}
+
+.userPic_orig {
+  width: 250px;
+  min-height: 250px;
+}
+
+/* Species photos */
+.speciesPhoto_default {
+  width: 600px;
+  min-height: 250px;
+}
