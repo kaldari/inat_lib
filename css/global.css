@@ -9,6 +9,7 @@
 .container {
   margin: 25px;
   border: 25px;
+  float: left;
 }
 
 .column-left {
