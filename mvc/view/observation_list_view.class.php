@@ -38,7 +38,7 @@ class observationListView {
       $html = $html . '<tr>';
 
       // Date posted column
-      $html = $html . '<td>' . $this->data[$i]['created_at'] . '</td>';
+      $html = $html . '<td>' . substr(($this->data[$i]['created_at']),0,-15) . '</td>';
 
       // User column
       $html = $html . '<td><a class="boxer button small" 
