@@ -1,28 +1,30 @@
+* {
+  border: 1px solid black;
+}
 
-/* 2 columns grid */
+/* Site-wide */
 
 .page-container {
-  width: 100%;
+  width: 900px;
   margin: auto;
 }
 
 .container {
-  margin: 25px;
-  border: 25px;
-  float: left;
+  width: 100%;
+  margin: 5px 0;
+  display: inline-block;
 }
+
+/* 2 columns grid */
 
 .column-left {
   width:50%; 
   float:left; 
-  position:relative; 
-  margin: auto;
+  position:relative;
 }
 
 .column-right {
   width: 50%;
-  padding:0px;
-  margin: auto;
   float: right;
 }
 

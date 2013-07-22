@@ -1,0 +1,17 @@
+#species_tabs {
+  width: 100%;
+}
+
+#species_profile {
+  width: 100%;
+}
+
+#species_photos {
+  width: 65%;
+  height: 450px;
+  border: 1px solid black;
+}
+
+#species_summary {
+  width: 30%;
+}

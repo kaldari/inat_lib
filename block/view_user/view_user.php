@@ -4,7 +4,7 @@
   global $lib_rootURL;
   
   echo '<link rel="stylesheet" type="text/css" ' .
-   'href="' . $lib_rootURL . 'css/user_view.css">';
+   'href="' . $lib_rootURL . 'css/view_user/view_user.css">';
   echo '<link rel="stylesheet" type="text/css" ' .
    'href="' . $lib_rootURL . 'css/global.css">';
    

@@ -7,14 +7,29 @@
   <link rel="stylesheet" type="text/css" href="css/inat.css">
 </head>
 <body>
-  <!-- Include jQuery -->
-  <?php include_once 'includes/jquery.include.php'; ?>
+  <!-- jQuery-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   
-    <!-- Include jQuery Boxer plugin -->
-  <?php include_once 'includes/jquery-boxer.include.php'; ?>
+  <!-- jQuery Boxer plugin -->
+  <script src="http://www.benplum.com/js/site.js"></script>
+  <link href="http://www.benplum.com/lab/_Formstone/Boxer/jquery.fs.boxer.css" 
+    rel="stylesheet" type="text/css" media="all" />
+  <script src="http://www.benplum.com/lab/_Formstone/Boxer/jquery.fs.boxer.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".boxer").boxer({
+        fixed: false,
+      });
+    });
+  </script>
+  <style>
+    .boxer-content[style] {
+      overflow-y: hidden !important;
+    }
+  </style>
   
-  <!-- Include jQuery Cookie plugin -->
-  <?php include_once 'includes/jquery-cookie.include.php'; ?>
+  <!-- jQuery Cookie plugin -->
+  <script src="' . $lib_rootURL . 'js/jquery/plugins/jquery-cookie-master/jquery.cookie.js"></script>
   
   <div id="form">
     <fieldset id='current_user' >

@@ -21,6 +21,8 @@ class observationListModel {
       $data = $this->http_get("http://www.inaturalist.org/observations/project/$id.json");
     } else if ($type == 'user') {
       $data = $this->http_get("http://www.inaturalist.org/observations/$id.json");
+    } else if ($type == 'species') {
+      $data = $this->http_get("http://www.inaturalist.org/observations.json?taxon_id=" . $id);
     }
     $data = json_decode($data, true);
     $this->data = $data;

@@ -1,0 +1,13 @@
+#user_badge {
+  display: inline;
+}
+
+#user_desc {
+  width: 65%;
+  display: inline;
+}
+
+#user_summary {
+  width: 30%;
+  display: inline-block;
+}
