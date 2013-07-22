@@ -8,6 +8,14 @@ echo
   '<!DOCTYPE html>
   <html>
     <head>
+      <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+      
+      <link rel="stylesheet" type="text/css"
+            href="' . $lib_rootURL . 'css/view_observation/standalone.css"/>
+      <link rel="stylesheet" type="text/css"
+          href="' . $lib_rootURL . 'css/view_observation/scrollable-horizontal.css" />
+      <link rel="stylesheet" type="text/css"
+          href="' . $lib_rootURL . 'css/view_observation/scrollable-buttons.css" />
       <link rel="stylesheet" type="text/css"
         href="' . $lib_rootURL . 'css/view_observation/view_observation.css">
       <link rel="stylesheet" type="text/css"

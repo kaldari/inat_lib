@@ -5,3 +5,8 @@
 #right {
   width: 49%;
 }
+
+#image_wrap {
+  width: auto;
+  height: 400px;
+}
