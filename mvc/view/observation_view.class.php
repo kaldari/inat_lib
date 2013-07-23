@@ -22,100 +22,96 @@ class observationView {
   public function html() {
   // Returns data in html format
   
+    // Display all available data -- use for development
+    /*
     foreach ($this->data as $key => $value) {
-      echo "<b>$key</b> is $value</br>";
-    }
-       echo '<hr>';
+      echo "<b>$key</b>: $value</br>";
+    } echo '<hr>';
+    */
     
-    $id = $this->data['id'];
-    $range_kmz = "http://www.inaturalist.org/taxa/$id/range.kml";
-    
+    // Construct html list for photos
+    $photos = "\n";
+    $count = 0;
     foreach ($this->data["observation_photos"] as $key => $array) {
-      echo $array['photo']['large_url'];
+      if( ($count == 0) || (($count % 4) == 0) )
+        $photos .= "\n<div>\n";
+      $photos .= "<img src='" . $array['photo']['thumb_url'] . "' />\n";
+      if( (($count+1) % 4) == 0 )
+        $photos .= "</div>\n";
+      $count++;
     }
+    if( ($count % 4) != 0 )
+      $photos .= "</div>\n\n";
     
+    // Return formatted html
     return
     '<div class="page-container" id="view_obs">  
+    <h2>' . 
+      $this->data["species_guess"] . ' observed by ' . 
+      $this->data["user_login"] . ' on ' . $this->data["observed_on"] . 
+    '</h2>
       <div class="container">
 		    <div id="left" class="column-left">
 		      <div>
-		      
-		      
-		      
-		      
-		      
-<div id="image_wrap">
-  <img src="/media/img/blank.gif" width="100%" height="375" />
-</div>
+            <div id="image_wrap">
+              <img src="/media/img/blank.gif" width="100%" height="375" />
+            </div>
 
-<div style="margin:0 auto; width: 634px; height:120px;">
-<a class="prev browse left"></a>
-<div class="scrollable" id="scrollable">
-  <div class="items">
-  
-    <div>
-      <img src="http://farm1.static.flickr.com/143/321464099_a7cfcb95cf_t.jpg" />
-      <img src="http://farm4.static.flickr.com/3089/2796719087_c3ee89a730_t.jpg" />
-      <img src="http://farm1.static.flickr.com/79/244441862_08ec9b6b49_t.jpg" />
-      <img src="http://farm1.static.flickr.com/28/66523124_b468cf4978_t.jpg" />
-    </div>
-    
-    <div>
-      <img src="http://farm1.static.flickr.com/163/399223609_db47d35b7c_t.jpg" />
-      <img src="http://farm1.static.flickr.com/135/321464104_c010dbf34c_t.jpg" />
-      <img src="http://farm1.static.flickr.com/40/117346184_9760f3aabc_t.jpg" />
-      <img src="http://farm1.static.flickr.com/153/399232237_6928a527c1_t.jpg" />
-    </div>
+            <div>
+            <a class="prev browse left"></a>
+            <div class="scrollable" id="scrollable">
+              <div class="items">' . $photos . '</div>
+            </div>
 
-    <div>
-      <img src="http://farm4.static.flickr.com/3629/3323896446_3b87a8bf75_t.jpg" />
-      <img src="http://farm4.static.flickr.com/3023/3323897466_e61624f6de_t.jpg" />
-      <img src="http://farm4.static.flickr.com/3650/3323058611_d35c894fab_t.jpg" />
-      <img src="http://farm4.static.flickr.com/3635/3323893254_3183671257_t.jpg" />
-    </div>
+            <a class="next browse right"></a>
+            </div>
+            <script>
+            $(function() {
+            $(".scrollable").scrollable();
 
-  </div>
+            $(".items img").click(function() {
+	            if ($(this).hasClass("active")) { return; }
+	            var url = $(this).attr("src").replace("_t", "");
+	            var wrap = $("#image_wrap").fadeTo("medium", 0.5);
+	            var img = new Image();
+	            img.onload = function() {
+		            wrap.fadeTo("fast", 1);
+		            wrap.find("img").attr("src", url);
+	            };
 
-</div>
-
-<a class="next browse right"></a>
-</div>
-<script>
-$(function() {
-$(".scrollable").scrollable();
-
-$(".items img").click(function() {
-	if ($(this).hasClass("active")) { return; }
-	var url = $(this).attr("src").replace("_t", "");
-	var wrap = $("#image_wrap").fadeTo("medium", 0.5);
-	var img = new Image();
-	img.onload = function() {
-		wrap.fadeTo("fast", 1);
-		wrap.find("img").attr("src", url);
-	};
-
-	img.src = url;
-	$(".items img").removeClass("active");
-	$(this).addClass("active");
-}).filter(":first").click();
-});
-</script>
-		      
-		      
-		      
-		      
-		      
-		      
-		      
-		      
-		      
+	            img.src = url;
+	            $(".items img").removeClass("active");
+	            $(this).addClass("active");
+            }).filter(":first").click();
+            });
+            </script>
 		      </div>
-		      <div>Obs details</div>
+		      <div>
+		        <h3>Obs details</h3>
+		        <p>Posted on ' . substr($this->data['created_at'], 0, -15) . 
+		          ' by ' . $this->data["user_login"] . '<p>
+		        <p>
+		          <table id="obs_details">
+              <tr>
+                <th>Date observed</td>
+                <th>Species guess</td>
+                <th>Taxon</td>
+              </tr>
+              <tr>
+                <td>' . $this->data['observed_on'] . '</td>
+                <td>' . $this->data['species_guess'] . '</td>
+                <td>' . $this->data['taxon_id'] . '</td>
+              </tr>
+              </table>
+            </p>
+		      </div>
 		      <div>
 		        <h3>Description</h3>
 		        <p>' . $this->data['description'] . '</p>
 		      </div>
-		      <div>Comments & identification</div>
+		      <div>
+		        <h3>Comments & identification</h3>
+		      </div>
         </div>
         
         <div id="right" class="column-right">
@@ -143,10 +139,17 @@ $(".items img").click(function() {
               google.maps.event.addDomListener(window, "load", initialize);
             </script>
           </div>
-          <div>Other photos</div>
-          <div>Identification summary</div>
-          <div>Data quality assessment</div>
-          <div>Small point about innacurate obs</div>
+          <div>
+            <h3>Additional fields (project)</h3>
+          </div>
+          <div>
+            <h3>Data quality assessment</h3>
+            <p>Quality grade: ' . $this->data["quality_grade"] . '</p>
+          </div>
+          <div>
+            <h3>Notes about obs accuracy</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
         </div>
       </div>
     </div>';

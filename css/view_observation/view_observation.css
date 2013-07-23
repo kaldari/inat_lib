@@ -10,3 +10,8 @@
   width: auto;
   height: 400px;
 }
+
+#obs_details {
+  width: 100%;
+  text-align: left;
+}
