@@ -28,7 +28,7 @@
 /* Image thumnail */
 .obs_photo_t {
   width: 75px;
-  max-height: 56px;
+  height: 56px;
   margin: 0 3px;
 }
 

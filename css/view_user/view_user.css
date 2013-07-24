@@ -11,3 +11,8 @@
   width: 30%;
   display: inline-block;
 }
+
+.userPic_orig {
+  width: 250px;
+  height: auto;
+}

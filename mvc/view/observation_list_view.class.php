@@ -27,6 +27,8 @@ class observationListView {
     global $lib_rootURL;
   
     // Print headers
+    $html .= '<link rel="stylesheet" type="text/css"
+        href="' . $lib_rootURL . 'css/global.css">';
     $html = $html . "<table>";   
     $html = $html . '<th>' . "Posted" . '</th>';
     $html = $html . '<th>' . "User" . '</th>';

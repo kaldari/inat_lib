@@ -61,7 +61,7 @@ class userView {
             
         <div id="user_summary" class="column-right">
           <td width="25%">
-            <img src="' . $this->data["original_user_icon_url"] . '" 
+            <img src="' . $this->data["medium_user_icon_url"] . '" 
               class="userPic_orig"><br>
             <p>' .
               '<p>aka ' . $this->data["name"] . 
