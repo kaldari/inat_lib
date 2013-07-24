@@ -29,13 +29,20 @@ class observationView {
     } echo '<hr>';
     */
     
+    $data = $this->data;
+    
+    // Observation title
+    $author_date = 'Posted by ' . 
+      $data["user_login"] . 
+      ($data["created_at"] ? (' on ' . substr($data["created_at"], 0, -15)) : '' );
+    
     // Construct html list for photos
     $photos = "\n";
     $count = 0;
-    foreach ($this->data["observation_photos"] as $key => $array) {
+    foreach ($data["observation_photos"] as $key => $array) {
       if( ($count == 0) || (($count % 4) == 0) )
         $photos .= "\n<div>\n";
-      $photos .= "<img src='" . $array['photo']['thumb_url'] . "' />\n";
+      $photos .= "<img class='obs_photo_t' src='" . $array['photo']['large_url'] . "' />\n";
       if( (($count+1) % 4) == 0 )
         $photos .= "</div>\n";
       $count++;
@@ -43,18 +50,21 @@ class observationView {
     if( ($count % 4) != 0 )
       $photos .= "</div>\n\n";
     
+    // Geoprivacy
+    $geoprivacy = 
+      $data['geoprivacy'] ? $data['geoprivacy'] : 'open';
+    
     // Return formatted html
     return
-    '<div class="page-container" id="view_obs">  
-    <h2>' . 
-      $this->data["species_guess"] . ' observed by ' . 
-      $this->data["user_login"] . ' on ' . $this->data["observed_on"] . 
-    '</h2>
+    '<div class="page-container" id="view_obs">
+      <div id="obs_navigation">
+        <p>Previous | Next</p>
+      </div>
       <div class="container">
 		    <div id="left" class="column-left">
 		      <div>
             <div id="image_wrap">
-              <img src="/media/img/blank.gif" width="100%" height="375" />
+              <img class="obs_photo_l" src=""/>
             </div>
 
             <div>
@@ -87,27 +97,23 @@ class observationView {
             </script>
 		      </div>
 		      <div>
-		        <h3>Obs details</h3>
-		        <p>Posted on ' . substr($this->data['created_at'], 0, -15) . 
-		          ' by ' . $this->data["user_login"] . '<p>
-		        <p>
+		        <h3>Observation details</h3>
+		          <p>' . $author_date . '</p>
 		          <table id="obs_details">
               <tr>
                 <th>Date observed</td>
                 <th>Species guess</td>
-                <th>Taxon</td>
               </tr>
               <tr>
-                <td>' . $this->data['observed_on'] . '</td>
-                <td>' . $this->data['species_guess'] . '</td>
-                <td>' . $this->data['taxon_id'] . '</td>
+                <td>' . $data['observed_on'] . '</td>
+                <td>' . $data['species_guess'] . '</td>
               </tr>
               </table>
             </p>
 		      </div>
 		      <div>
 		        <h3>Description</h3>
-		        <p>' . $this->data['description'] . '</p>
+		        <p>' . $data['description'] . '</p>
 		      </div>
 		      <div>
 		        <h3>Comments & identification</h3>
@@ -119,8 +125,8 @@ class observationView {
             <script type="text/javascript"> 
               function initialize() {
                 var myLatlng = new 
-                  google.maps.LatLng(' . $this->data['latitude'] . ',' . 
-                  $this->data['longitude'] . ');
+                  google.maps.LatLng(' . $data['latitude'] . ',' . 
+                  $data['longitude'] . ');
                 var mapOptions = {
                   zoom: 4,
                   center: myLatlng,
@@ -140,15 +146,13 @@ class observationView {
             </script>
           </div>
           <div>
-            <h3>Additional fields (project)</h3>
+            <p><b>Geoprivacy:</b> ' . $geoprivacy . '<p>
           </div>
           <div>
-            <h3>Data quality assessment</h3>
-            <p>Quality grade: ' . $this->data["quality_grade"] . '</p>
+            <p><b>Quality grade:</b> ' . $data["quality_grade"] . '</p>
           </div>
           <div>
-            <h3>Notes about obs accuracy</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Additional details</h3>
           </div>
         </div>
       </div>

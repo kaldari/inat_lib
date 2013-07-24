@@ -73,16 +73,16 @@ class speciesView {
       
       <div id="species_tabs" class="container">
         <ul class="css-tabs">
-          <li><a href="">Description</a></li>
-          <li><a href="' . $lib_rootURL . 'block/view_species/range_map?id=' . 
+          <li><a href="' . $lib_rootURL . 
+            'block/view_species/description.php?title=' . 
+            str_replace(' ', '_', $this->data['name']) . '">Description</a></li>
+          <li><a href="' . $lib_rootURL . 'block/view_species/range_map.php?id=' . 
             $this->data["id"] . '">Range map</a></li>
           <li><a href="ajax3.htm">Assessment</a></li>
         </ul>
 
         <div class="css-panes">
-          <div id="species_desc" style="display:block">' .
-            '<p>' . $this->data["wikipedia_summary"] . '</p>' .
-          '</div>
+          <div></div>
           <div></div>
           <div></div>
         </div>
@@ -105,6 +105,17 @@ class speciesView {
       </div>
     </div>
     </body>' . "\n";
+  }
+  
+  private function http_get($url){
+  // A helper function that GETs the input url
+  // POST: Returns server response
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
   }
 }
 
